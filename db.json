@@ -1,0 +1,24 @@
+{
+  "videos": [
+    {
+      "id": 1,
+      "link": "https://www.youtube-nocookie.com/embed/tjA7nAHOAww",
+      "title": "LSD Audio"
+    },
+    {
+      "id": 2,
+      "link": "https://www.youtube-nocookie.com/embed/kg1BljLu9YY",
+      "title": "LSD Thunderclouds"
+    },
+    {
+      "id": 3,
+      "link": "https://www.youtube-nocookie.com/embed/T_GecdMywPw",
+      "title": "Rubinstein Chopin Piano Concerto No.2 (HD)"
+    },
+    {
+      "id": 4,
+      "link": "https://www.youtube-nocookie.com/embed/Isic2Z2e2xs",
+      "title": "Gustav Holst  The Planets, Full Suite"
+    }
+  ]
+}
