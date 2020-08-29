@@ -1,34 +1,32 @@
 import React from "react";
-import {
-  Typography,
-  Toolbar,
-  AppBar,
-  IconButton,
-  Button,
-  Container,
-} from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import AppBar from "@material-ui/core/AppBar";
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { toggleDrawer } from "../reducers/mobileReducer";
+import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
+  const classes = useSelector((state) => state.classes);
+  const dispatch = useDispatch();
+
   return (
-    <AppBar position="static">
-      <Container>
-        <Toolbar>
-          <IconButton
-            style={{ marginRight: 8 }}
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <Menu />
-          </IconButton>
-          <Typography variant="h6" style={{ flexGrow: 1, textAlign: "center" }}>
-            Welcome to VCFilms Website
-          </Typography>
-          <Button color="inherit">Videos</Button>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </Container>
+    <AppBar position="fixed">
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={() => dispatch(toggleDrawer())}
+          className={classes.menuButton}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" style={{ flexGrow: 1, textAlign: "center" }}>
+          Welcome to VCFilms Website
+        </Typography>
+      </Toolbar>
     </AppBar>
   );
 };

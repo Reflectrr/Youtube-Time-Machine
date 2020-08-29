@@ -4,14 +4,17 @@ import ContainerBox from "./components/ContainerBox";
 import VideoView from "./components/VideoView";
 import useStyle from "./style";
 import { fetchVideos } from "./services/service";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setVideos } from "./reducers/videoReducer";
 import { setClasses } from "./reducers/styleReducer";
+import { Switch, Route } from "react-router-dom";
+import NavList from "./components/NavList";
+import Drawer from "./components/Drawer";
 
 const App = () => {
   const classes = useStyle();
   const dispatch = useDispatch();
-  const videos = useSelector((state) => state.videos);
+  //const videos = useSelector((state) => state.videos);
 
   useEffect(() => {
     fetchVideos().then((videos) => {
@@ -21,11 +24,23 @@ const App = () => {
   }, [classes, dispatch]);
 
   return (
-    <div>
+    <div className={classes.root}>
       <Navbar />
-      <ContainerBox className="VideoViewBox">
-        <VideoView video={videos[0]} />
-      </ContainerBox>
+      <Drawer />
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        <Switch>
+          <Route path="/videos/:id">
+            <ContainerBox>
+              <VideoView />
+            </ContainerBox>
+          </Route>
+
+          <Route path="/">
+            <NavList />
+          </Route>
+        </Switch>
+      </main>
     </div>
   );
 };
