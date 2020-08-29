@@ -3,13 +3,15 @@ import AppBar from "@material-ui/core/AppBar";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { toggleDrawer } from "../reducers/mobileReducer";
 import { useSelector, useDispatch } from "react-redux";
+import { Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   const classes = useSelector((state) => state.classes);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <AppBar position="fixed">
@@ -23,9 +25,13 @@ const Navbar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" style={{ flexGrow: 1, textAlign: "center" }}>
+        <Button
+          variant="text"
+          style={{ color: "white", display: "block", width: "100%" }}
+          onClick={() => history.push("/")}
+        >
           Welcome to VCFilms Website
-        </Typography>
+        </Button>
       </Toolbar>
     </AppBar>
   );

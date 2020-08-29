@@ -29,17 +29,17 @@ const App = () => {
       <Drawer />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Switch>
-          <Route path="/videos/:id">
-            <ContainerBox>
+        <ContainerBox>
+          <Switch>
+            <Route path="/videos/:id">
               <VideoView />
-            </ContainerBox>
-          </Route>
+            </Route>
 
-          <Route path="/">
-            <NavList />
-          </Route>
-        </Switch>
+            <Route path="/">
+              <NavList />
+            </Route>
+          </Switch>
+        </ContainerBox>
       </main>
     </div>
   );
