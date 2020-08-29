@@ -10,6 +10,8 @@ const reducer = combineReducers({
   drawer: mobileReducer,
 });
 
-const store = createStore(reducer, composeWithDevTools());
+const store = composeWithDevTools
+  ? createStore(reducer, composeWithDevTools())
+  : createStore(reducer);
 
 export default store;
