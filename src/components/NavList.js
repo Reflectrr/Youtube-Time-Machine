@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const NavList = ({ currentVideoId }) => {
   const videos = useSelector((state) => state.videos);
   const classes = useSelector((state) => state.classes);
+  if (!videos) return null;
   return (
     <ul>
       {videos.map((v) => {
