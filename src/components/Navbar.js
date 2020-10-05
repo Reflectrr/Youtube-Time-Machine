@@ -4,8 +4,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import { toggleDrawer } from "../reducers/mobileReducer";
+import { setCategory } from "../reducers/listReducer";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "@material-ui/core";
+import { Button, Hidden } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
@@ -13,9 +14,15 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  return (
-    <AppBar position="fixed">
-      <Toolbar>
+  const onClick = (category, route) => {
+    dispatch(setCategory(category));
+    history.push(route);
+  };
+
+  const Menu = (
+    <>
+      <span style={{ flexGrow: 1 }} />
+      <Hidden mdUp>
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -25,13 +32,44 @@ const Navbar = () => {
         >
           <MenuIcon />
         </IconButton>
+      </Hidden>
+      <Hidden smDown>
         <Button
           variant="text"
-          style={{ color: "white", display: "block", width: "100%" }}
+          className={classes.toolbarButtons}
+          onClick={() => onClick("Chapel", "/")}
+        >
+          Chapel
+        </Button>
+        <Button
+          variant="text"
+          className={classes.toolbarButtons}
+          onClick={() => onClick("EMS", "/")}
+        >
+          Early Morning Show
+        </Button>
+        <Button
+          variant="text"
+          className={classes.toolbarButtons}
           onClick={() => history.push("/")}
         >
-          Welcome to VCFilms Website
+          About Us
         </Button>
+      </Hidden>
+    </>
+  );
+
+  return (
+    <AppBar position="fixed">
+      <Toolbar>
+        <Button
+          variant="text"
+          className={classes.toolbarButtons}
+          onClick={() => history.push("/")}
+        >
+          VCFilms
+        </Button>
+        {Menu}
       </Toolbar>
     </AppBar>
   );

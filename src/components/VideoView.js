@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const VideoView = () => {
-  const videos = useSelector((state) => state.videos);
+  const allVideos = useSelector((state) => state.videos.allVideos);
   const classes = useSelector((state) => state.classes);
   const { id } = useParams();
-  const video = videos.find((v) => v.id.toString() === id);
+  const video = allVideos.find((v) => v.id.toString() === id);
   if (!video) return null;
   return (
     <Grid container>

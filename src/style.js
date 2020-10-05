@@ -9,12 +9,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
   iframe: {
     position: "absolute",
     top: "0",
@@ -34,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
+  toolbarButtons: {
+    color: "white",
+    fontSize: "18px",
+  },
   drawerPaper: {
     width: drawerWidth,
   },

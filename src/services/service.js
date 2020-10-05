@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const baseUrl = "https://vcfilms-backend.herokuapp.com";
+const baseUrl =
+  process.env.NODE_ENV === "dev"
+    ? "https://vcfilms-backend.herokuapp.com"
+    : "http://localhost:3001";
 
 export const fetchVideos = () => {
   const request = axios.get(`${baseUrl}/videos`);
