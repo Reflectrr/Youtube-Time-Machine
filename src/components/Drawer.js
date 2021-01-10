@@ -40,20 +40,20 @@ const DrawerComponent = () => {
             <ListItem
               button
               key="chapel-of-the-week"
-              onClick={() => onClick("Chapel", "/")}
+              onClick={() => onClick("Chapel", "/chapel")}
             >
               <Link to="/">Chapel of the Week</Link>
             </ListItem>
             <ListItem
               button
               key="early-moring-show"
-              onClick={() => onClick("EMS", "/")}
+              onClick={() => onClick("EMS", "/ems")}
             >
               <Link to="/">Early Morning Show</Link>
             </ListItem>
-            <ListItem button key="about-us">
+            {/*<ListItem button key="about-us">
               <Link to="/">About us</Link>
-            </ListItem>
+            </ListItem>*/}
           </List>
           <Divider />
         </div>

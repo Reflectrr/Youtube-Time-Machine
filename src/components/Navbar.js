@@ -37,24 +37,24 @@ const Navbar = () => {
         <Button
           variant="text"
           className={classes.toolbarButtons}
-          onClick={() => onClick("Chapel", "/")}
+          onClick={() => onClick("Chapel", "/chapel")}
         >
           Chapel
         </Button>
         <Button
           variant="text"
           className={classes.toolbarButtons}
-          onClick={() => onClick("EMS", "/")}
+          onClick={() => onClick("EMS", "/ems")}
         >
           Early Morning Show
         </Button>
-        <Button
+        {/*<Button
           variant="text"
           className={classes.toolbarButtons}
           onClick={() => history.push("/")}
         >
           About Us
-        </Button>
+        </Button>*/}
       </Hidden>
     </>
   );

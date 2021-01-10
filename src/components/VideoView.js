@@ -9,25 +9,24 @@ const VideoView = () => {
   const classes = useSelector((state) => state.classes);
   const { id } = useParams();
   const video = allVideos.find((v) => v.id.toString() === id);
-  if (!video) return null;
   return (
     <Grid container>
-      <Grid item xs={12} md={4}>
-        <NavList currentVideoId={video.id} />
+      <Grid item xs={12} md={3}>
+        <NavList currentVideoId={video ? video.id : undefined} />
       </Grid>
-      <Grid item xs={12} md={8}>
-        <Container className={classes.iframeContainer}>
-          <iframe
-            title={video.title}
-            width="560"
-            height="315"
-            src={video.link}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className={classes.iframe}
-          />
-        </Container>
+      <Grid item xs={12} md={9}>
+        {video ? (
+          <Container className={classes.iframeContainer}>
+            <iframe
+              className={classes.iframe}
+              title={video.title}
+              src={video.link}
+              frameBorder="0"
+              //allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </Container>
+        ) : null}
       </Grid>
     </Grid>
   );

@@ -1,25 +1,38 @@
 import React from "react";
-import { Typograghy } from "@material-ui/core";
+import { Typography, Container, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const HomePageView = () => {
   const classes = useSelector((state) => state.classes);
-  const video = useSelector((state) => state.videos);
-  //TODO
+  const video = useSelector(
+    (state) => state.videos.chapelVideos[state.videos.chapelVideos.length - 1]
+  );
+  if (!video) return null;
   return (
-    <div>
-      <Typograghy>Chapel of the Week</Typograghy>
-      <iframe
-        title={video.title}
-        width="560"
-        height="315"
-        src={video.link}
-        frameBorder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        className={classes.iframe}
-      />
-    </div>
+    <Grid container>
+      <Grid item xs={12}>
+        <Typography
+          className={classes.centeredText}
+          variant="h3"
+          component="h1"
+          gutterBottom
+        >
+          Chapel of the Week
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Container className={classes.iframeContainer}>
+          <iframe
+            className={classes.iframe}
+            title={video.title}
+            src={video.link}
+            //allow="accelerometer; autoplay; encrypted-media; gyrocope; picture-in-picture"
+            frameBorder="0"
+            allowFullScreen
+          />
+        </Container>
+      </Grid>
+    </Grid>
   );
 };
 

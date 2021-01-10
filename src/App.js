@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
-import VideoView from "./components/VideoView";
-import useStyle from "./style";
+import { useStyles } from "./style";
 import { fetchVideos } from "./services/service";
 import { useDispatch } from "react-redux";
 import { setVideos } from "./reducers/videoReducer";
 import { setClasses } from "./reducers/styleReducer";
-import { Switch, Route } from "react-router-dom";
-import NavList from "./components/NavList";
 import Drawer from "./components/Drawer";
+import Routing from "./components/utils/Routing";
 
 const App = () => {
-  const classes = useStyle();
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,15 +29,7 @@ const App = () => {
       <Drawer />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Switch>
-          <Route path="/videos/:id">
-            <VideoView />
-          </Route>
-
-          <Route path="/">
-            <NavList />
-          </Route>
-        </Switch>
+        <Routing />
       </main>
     </div>
   );
