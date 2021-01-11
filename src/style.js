@@ -3,6 +3,7 @@ import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 const drawerWidth = 240;
 export const customTheme = createMuiTheme({
   palette: {
+    type: "dark",
     primary: {
       light: "#4c4c4c",
       main: "#202020",
@@ -15,6 +16,9 @@ export const customTheme = createMuiTheme({
       dark: "#590000",
       contrastText: "#000",
     },
+    background: {
+      default: "#202020",
+    },
   },
 });
 export const useStyles = makeStyles((theme) => ({
@@ -23,7 +27,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    backgroundColor: "#202020",
   },
   iframe: {
     position: "absolute",

@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Container, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import SubsectionRow from "./SubsectionRow";
 
 const HomePageView = () => {
   const classes = useSelector((state) => state.classes);
@@ -10,28 +11,10 @@ const HomePageView = () => {
   if (!video) return null;
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <Typography
-          className={classes.centeredText}
-          variant="h3"
-          component="h1"
-          gutterBottom
-        >
-          Chapel of the Week
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Container className={classes.iframeContainer}>
-          <iframe
-            className={classes.iframe}
-            title={video.title}
-            src={video.link}
-            //allow="accelerometer; autoplay; encrypted-media; gyrocope; picture-in-picture"
-            frameBorder="0"
-            allowFullScreen
-          />
-        </Container>
-      </Grid>
+      <SubsectionRow text="What's New" />
+      <SubsectionRow text="Chapel" />
+      <SubsectionRow text="Early Morning Shows" />
+      <SubsectionRow text="The Message" />
     </Grid>
   );
 };
