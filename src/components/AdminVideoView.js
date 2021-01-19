@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { updateVideo } from "../services/service";
 
 const AdminVideoView = () => {
@@ -34,7 +34,13 @@ const AdminVideoView = () => {
     setType(event.target.value);
   };
   const handleClick = async () => {
-    await updateVideo({ title, description, type }, video);
+    const response = await updateVideo(
+      { title, description, type },
+      video.videoId
+    );
+    // TODO: make status easier to find
+    if (response.status === 200) console.log("success");
+    return;
   };
 
   console.log(video);
@@ -83,7 +89,12 @@ const AdminVideoView = () => {
           </RadioGroup>
         </FormControl>
       </ListItem>
-      <Button onClick={handleClick}>Save</Button>
+      <Link to="/admin" className={classes.buttonLink}>
+        <Button variant="contained">Back</Button>
+      </Link>
+      <Button variant="contained" onClick={handleClick}>
+        Save
+      </Button>
     </List>
   );
 };

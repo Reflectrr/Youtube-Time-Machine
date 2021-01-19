@@ -22,6 +22,15 @@ export const customTheme = createMuiTheme({
   },
 });
 export const useStyles = makeStyles((theme) => ({
+  buttonLink: {
+    padding: theme.spacing(2),
+    color: "#FFF",
+    textDecoration: "none",
+  },
+  whiteText: {
+    color: "#FFF",
+    textDecoration: "none",
+  },
   flexGrow: {
     flexGrow: "1",
   },

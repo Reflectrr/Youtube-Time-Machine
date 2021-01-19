@@ -10,16 +10,8 @@ export const fetchVideos = async () => {
   return videos.data;
 };
 
-export const updateVideo = async (newInfo, video) => {
-  const newVideo = {
-    ...video,
-    title: newInfo.title,
-    description: newInfo.description,
-    type: newInfo.type,
-  };
-  const response = await axios.post(
-    `${baseUrl}/api/videos/${video.videoId}`,
-    newVideo
-  );
+export const updateVideo = async (newInfo, videoId) => {
+  const response = await axios.put(`${baseUrl}/api/videos/${videoId}`, newInfo);
+  console.log(response);
   return response;
 };
