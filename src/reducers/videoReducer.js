@@ -2,12 +2,16 @@ const initialState = {
   allVideos: [],
   earlyMorningShows: [],
   chapelVideos: [],
+  otherVideos: [],
+  messageVideos: [],
 };
 
 const typeMap = new Map();
-typeMap.set("Chapel", "SET_CHAPELVIDEOS");
-typeMap.set("EMS", "SET_EMS");
-typeMap.set("All", "SET_ALLVIDEOS");
+typeMap.set("chapel", "SET_CHAPELVIDEOS");
+typeMap.set("ems", "SET_EMS");
+typeMap.set("all", "SET_ALLVIDEOS");
+typeMap.set("message", "SET_MESSAGEVIDEOS");
+typeMap.set("other", "SET_OTHERVIDEOS");
 
 const videoReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -17,6 +21,10 @@ const videoReducer = (state = initialState, action) => {
       return { ...state, earlyMorningShows: action.videos };
     case "SET_CHAPELVIDEOS":
       return { ...state, chapelVideos: action.videos };
+    case "SET_MESSAGEVIDEOS":
+      return { ...state, messageVideos: action.videos };
+    case "SET_OTHERVIDEOS":
+      return { ...state, otherVideos: action.videos };
     default:
       return state;
   }

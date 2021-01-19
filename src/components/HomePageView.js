@@ -5,10 +5,10 @@ import SubsectionRow from "./SubsectionRow";
 
 const HomePageView = () => {
   const classes = useSelector((state) => state.classes);
-  const video = useSelector(
-    (state) => state.videos.chapelVideos[state.videos.chapelVideos.length - 1]
-  );
-  if (!video) return null;
+  // const video = useSelector(
+  //   (state) => state.videos.chapelVideos[state.videos.chapelVideos.length - 1]
+  // );
+  // if (!video) return null;
   return (
     <Grid container>
       <SubsectionRow text="What's New" />

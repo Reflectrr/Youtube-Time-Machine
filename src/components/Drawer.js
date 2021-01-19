@@ -3,7 +3,6 @@ import { Drawer, Divider, List, ListItem } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../reducers/mobileReducer";
 import { Link } from "react-router-dom";
-import { setCategory } from "../reducers/listReducer";
 import { useHistory } from "react-router-dom";
 
 const DrawerComponent = () => {
@@ -13,7 +12,6 @@ const DrawerComponent = () => {
   const history = useHistory();
 
   const onClick = (category, route) => {
-    dispatch(setCategory(category));
     history.push(route);
     dispatch(toggleDrawer());
   };

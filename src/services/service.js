@@ -5,7 +5,21 @@ const baseUrl =
     ? "https://vcfilms-backend.herokuapp.com"
     : "http://localhost:3001";
 
-export const fetchVideos = () => {
-  const request = axios.get(`${baseUrl}/videos`);
-  return request.then((res) => res.data);
+export const fetchVideos = async () => {
+  const videos = await axios.get(`${baseUrl}/api/videos/all`);
+  return videos.data;
+};
+
+export const updateVideo = async (newInfo, video) => {
+  const newVideo = {
+    ...video,
+    title: newInfo.title,
+    description: newInfo.description,
+    type: newInfo.type,
+  };
+  const response = await axios.post(
+    `${baseUrl}/api/videos/${video.videoId}`,
+    newVideo
+  );
+  return response;
 };

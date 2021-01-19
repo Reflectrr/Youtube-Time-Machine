@@ -22,12 +22,15 @@ export const customTheme = createMuiTheme({
   },
 });
 export const useStyles = makeStyles((theme) => ({
+  flexGrow: {
+    flexGrow: "1",
+  },
   navbar: {
     height: "100px",
   },
-  root: {
-    display: "flex",
-  },
+  // root: {
+  //   display: "flex",
+  // },
   iframe: {
     position: "absolute",
     top: "0",
@@ -53,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   content: {
-    flexGrow: 1,
+    // flexGrow: 1,
     padding: theme.spacing(3),
   },
   videoListItem: {

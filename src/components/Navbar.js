@@ -1,10 +1,7 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
 import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
-import Toolbar from "@material-ui/core/Toolbar";
+import { AppBar, IconButton, Toolbar } from "@material-ui/core";
 import { toggleDrawer } from "../reducers/mobileReducer";
-import { setCategory } from "../reducers/listReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
@@ -15,7 +12,6 @@ const Navbar = () => {
   const history = useHistory();
 
   const onClick = (category, route) => {
-    dispatch(setCategory(category));
     history.push(route);
   };
 
@@ -60,18 +56,20 @@ const Navbar = () => {
   );
 
   return (
-    <AppBar position="fixed">
-      <Toolbar>
-        <Button
-          variant="text"
-          className={classes.toolbarButtons}
-          onClick={() => history.push("/")}
-        >
-          VCFilms
-        </Button>
-        {Menu}
-      </Toolbar>
-    </AppBar>
+    <Toolbar>
+      <AppBar position="fixed">
+        <Toolbar>
+          <Button
+            variant="text"
+            className={classes.toolbarButtons}
+            onClick={() => history.push("/")}
+          >
+            VCFilms
+          </Button>
+          {Menu}
+        </Toolbar>
+      </AppBar>
+    </Toolbar>
   );
 };
 
