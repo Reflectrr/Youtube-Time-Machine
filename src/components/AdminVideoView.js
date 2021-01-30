@@ -8,12 +8,15 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { updateVideo } from "../services/service";
 import CategoryRadioGroup from "./CategoryRadioGroup";
+import { fetchVideos } from "../services/service";
+import { setVideos } from "../reducers/videoReducer";
 
 const AdminVideoView = () => {
+  const dispatch = useDispatch();
   const { videoId } = useParams();
   const video = useSelector((state) =>
     state.videos.allVideos.find((v) => v.videoId === videoId)
@@ -42,6 +45,8 @@ const AdminVideoView = () => {
     // TODO: make status easier to find
     if (response.status === 200) {
       setMessage("Successfully saved!");
+      const allVideos = await fetchVideos();
+      dispatch(setVideos(allVideos, "all"));
       setTimeout(() => {
         setMessage(null);
         history.push("/admin");
