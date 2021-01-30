@@ -22,8 +22,10 @@ export const customTheme = createMuiTheme({
   },
 });
 export const useStyles = makeStyles((theme) => ({
+  paddingRight: {
+    paddingRight: theme.spacing(2),
+  },
   buttonLink: {
-    padding: theme.spacing(2),
     color: "#FFF",
     textDecoration: "none",
   },

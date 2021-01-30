@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormControlLabel,
@@ -8,10 +9,11 @@ import {
   Radio,
   RadioGroup,
   TextField,
+  Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { updateVideo } from "../services/service";
 
 const AdminVideoView = () => {
@@ -20,10 +22,11 @@ const AdminVideoView = () => {
     state.videos.allVideos.find((v) => v.videoId === videoId)
   );
   const classes = useSelector((state) => state.classes);
-  // TODO: check reliability
+  const history = useHistory();
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [type, setType] = useState(null);
+  const [message, setMessage] = useState(null);
 
   if (!video) return null;
   if (title === null) setTitle(video.title);
@@ -39,7 +42,13 @@ const AdminVideoView = () => {
       video.videoId
     );
     // TODO: make status easier to find
-    if (response.status === 200) console.log("success");
+    if (response.status === 200) {
+      setMessage("Successfully saved!");
+      setTimeout(() => {
+        setMessage(null);
+        history.push("/admin");
+      }, 1000);
+    }
     return;
   };
 
@@ -47,7 +56,10 @@ const AdminVideoView = () => {
   return (
     <List>
       <ListItem>
-        <ListItemText primary={"Title: "}></ListItemText>
+        <ListItemText
+          className={classes.paddingRight}
+          primary={"Title: "}
+        ></ListItemText>
         <TextField
           variant="outlined"
           defaultValue={title ? title : ""}
@@ -59,7 +71,10 @@ const AdminVideoView = () => {
         <ListItemText primary={`VideoID: ${video.videoId} `}></ListItemText>
       </ListItem>
       <ListItem alignItems="flex-start">
-        <ListItemText primary={"Description: "}></ListItemText>
+        <ListItemText
+          className={classes.paddingRight}
+          primary={"Description: "}
+        ></ListItemText>
         <TextField
           variant="outlined"
           defaultValue={description ? description : ""}
@@ -89,12 +104,26 @@ const AdminVideoView = () => {
           </RadioGroup>
         </FormControl>
       </ListItem>
-      <Link to="/admin" className={classes.buttonLink}>
-        <Button variant="contained">Back</Button>
-      </Link>
-      <Button variant="contained" onClick={handleClick}>
-        Save
-      </Button>
+      <ListItem>
+        <Link
+          to="/admin"
+          className={`${classes.buttonLink} ${classes.paddingRight}`}
+        >
+          <Button variant="contained">Back</Button>
+        </Link>
+        <Box className={classes.paddingRight}>
+          <Button
+            variant="contained"
+            onClick={handleClick}
+            className={classes.paddingRight}
+          >
+            Save
+          </Button>
+        </Box>
+        <Typography display="inline" className={classes.paddingRight}>
+          {message}
+        </Typography>
+      </ListItem>
     </List>
   );
 };
