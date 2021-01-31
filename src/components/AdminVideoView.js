@@ -38,7 +38,6 @@ const AdminVideoView = () => {
   }, [video, dispatch]);
 
   if (!video) return null;
-  // TODO
   const submit = async () => {
     const response = await updateVideo(change.videoContent, change.videoId);
     if (response.status === 200) {
