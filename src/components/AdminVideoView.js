@@ -7,13 +7,19 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { updateVideo } from "../services/service";
 import CategoryRadioGroup from "./CategoryRadioGroup";
 import { fetchVideos } from "../services/service";
 import { setVideos } from "../reducers/videoReducer";
+import {
+  resetChangeVideo,
+  setChangeVideo,
+  setDescription,
+  setTitle,
+} from "../reducers/changeReducer";
 
 const AdminVideoView = () => {
   const dispatch = useDispatch();
@@ -21,28 +27,20 @@ const AdminVideoView = () => {
   const video = useSelector((state) =>
     state.videos.allVideos.find((v) => v.videoId === videoId)
   );
+  const change = useSelector((state) => state.change);
   const classes = useSelector((state) => state.classes);
   const history = useHistory();
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
   const [message, setMessage] = useState(null);
-  const [type, setType] = useState(null);
+
+  useEffect(() => {
+    dispatch(setChangeVideo(video));
+    console.log("changed");
+  }, [video, dispatch]);
 
   if (!video) return null;
-  if (title === null) setTitle(video.title);
-  if (description === null) setDescription(video.description);
-  if (type === null) setType(video.type);
-
-  const handleChange = (event) => {
-    setType(event.target.value);
-    console.log(event.target.value);
-  };
-  const handleClick = async () => {
-    const response = await updateVideo(
-      { title, description, type },
-      video.videoId
-    );
-    // TODO: make status easier to find
+  // TODO
+  const submit = async () => {
+    const response = await updateVideo(change.videoContent, change.videoId);
     if (response.status === 200) {
       setMessage("Successfully saved!");
       const allVideos = await fetchVideos();
@@ -51,11 +49,11 @@ const AdminVideoView = () => {
         setMessage(null);
         history.push("/admin");
       }, 1000);
+      dispatch(resetChangeVideo());
     }
     return;
   };
 
-  console.log(type);
   return (
     <List>
       <ListItem>
@@ -65,8 +63,8 @@ const AdminVideoView = () => {
         ></ListItemText>
         <TextField
           variant="outlined"
-          defaultValue={title ? title : ""}
-          onChange={setTitle}
+          defaultValue={video.title}
+          onChange={(event) => dispatch(setTitle(event.target.value))}
           fullWidth
         />
       </ListItem>
@@ -80,8 +78,8 @@ const AdminVideoView = () => {
         ></ListItemText>
         <TextField
           variant="outlined"
-          defaultValue={description ? description : ""}
-          onChange={setDescription}
+          defaultValue={video.description}
+          onChange={(event) => dispatch(setDescription(event.target.value))}
           fullWidth
         />
       </ListItem>
@@ -89,20 +87,25 @@ const AdminVideoView = () => {
         <ListItemText primary={`Date: ${video.date}`}></ListItemText>
       </ListItem>
       <ListItem>
-        <ListItemText primary={`Type: ${type}`}></ListItemText>
+        <ListItemText primary={`Type: ${video.type}`}></ListItemText>
+        <CategoryRadioGroup video={video} flexGrow />
       </ListItem>
-      <CategoryRadioGroup type={type} handleChange={handleChange} />
       <ListItem>
         <Link
           to="/admin"
           className={`${classes.buttonLink} ${classes.paddingRight}`}
         >
-          <Button variant="contained">Back</Button>
+          <Button
+            variant="contained"
+            onClick={() => dispatch(resetChangeVideo())}
+          >
+            Back
+          </Button>
         </Link>
         <Box className={classes.paddingRight}>
           <Button
             variant="contained"
-            onClick={handleClick}
+            onClick={submit}
             className={classes.paddingRight}
           >
             Save
