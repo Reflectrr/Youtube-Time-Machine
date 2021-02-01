@@ -34,7 +34,6 @@ const AdminVideoView = () => {
 
   useEffect(() => {
     dispatch(setChangeVideo(video));
-    console.log("changed");
   }, [video, dispatch]);
 
   if (!video) return null;

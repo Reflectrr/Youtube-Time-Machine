@@ -77,7 +77,6 @@ export const setType = (videoType) => {
 };
 
 export const resetChangeVideo = () => {
-  console.log("reseted");
   return {
     type: "RESET_CHANGEVIDEO",
   };

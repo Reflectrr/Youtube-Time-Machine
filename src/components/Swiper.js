@@ -12,7 +12,7 @@ export default () => {
     <Swiper
       spaceBetween={30}
       slidesPerView={3}
-      onSlideChange={() => console.log("slide change")}
+      // onSlideChange={() => console.log("slide change")}
       slidesPerGroup={3}
       loop={true}
       loopFillGroupWithBlank={true}
@@ -21,7 +21,7 @@ export default () => {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       }}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide>Slide 1</SwiperSlide>
       <SwiperSlide>Slide 2</SwiperSlide>
