@@ -2,24 +2,24 @@ import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
 export const customTheme = createMuiTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      light: "#4c4c4c",
-      main: "#202020",
-      dark: "#161616",
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: "#993333",
-      main: "#800000",
-      dark: "#590000",
-      contrastText: "#000",
-    },
-    background: {
-      default: "#202020",
-    },
-  },
+  // palette: {
+  //   type: "dark",
+  //   primary: {
+  //     light: "#4c4c4c",
+  //     main: "#202020",
+  //     dark: "#161616",
+  //     contrastText: "#fff",
+  //   },
+  //   secondary: {
+  //     light: "#993333",
+  //     main: "#800000",
+  //     dark: "#590000",
+  //     contrastText: "#000",
+  //   },
+  //   background: {
+  //     default: "#202020",
+  //   },
+  // },
 });
 export const useStyles = makeStyles((theme) => ({
   paddingRight: {

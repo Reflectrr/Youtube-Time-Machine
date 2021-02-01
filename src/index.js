@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { customTheme } from "./style";
+import "swiper/swiper.scss";
+
 ReactDOM.render(
   <Router>
     <Provider store={store}>
