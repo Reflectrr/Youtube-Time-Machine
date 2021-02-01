@@ -34,7 +34,7 @@ const App = () => {
       <Navbar />
       <Drawer />
 
-      <main className={classes.content}>
+      <main className={classes.bigPadding}>
         <Routing />
       </main>
     </div>

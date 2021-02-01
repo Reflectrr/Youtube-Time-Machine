@@ -66,8 +66,7 @@ export const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-  content: {
-    // flexGrow: 1,
+  bigPadding: {
     padding: theme.spacing(3),
   },
   videoListItem: {

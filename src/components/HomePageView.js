@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Container, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import SubsectionRow from "./SubsectionRow";
+import SubsectionRow from "./SectionRow";
 
 const HomePageView = () => {
   const classes = useSelector((state) => state.classes);

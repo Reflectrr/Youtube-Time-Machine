@@ -1,15 +1,12 @@
 import { ListItem } from "@material-ui/core";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CategoryRadioGroup from "./CategoryRadioGroup";
-import { updateVideo, fetchVideos } from "../services/service";
-import { setVideos } from "../reducers/videoReducer";
 
 const AdminView = () => {
   const allVideos = useSelector((state) => state.videos.allVideos);
   const classes = useSelector((state) => state.classes);
-  const dispatch = useDispatch();
 
   if (!allVideos) return null;
 
