@@ -10,12 +10,12 @@ const HomePageView = () => {
   // );
   // if (!video) return null;
   return (
-    <Grid container>
+    <div>
       <SubsectionRow text="What's New" />
       <SubsectionRow text="Chapel" />
       <SubsectionRow text="Early Morning Shows" />
       <SubsectionRow text="The Message" />
-    </Grid>
+    </div>
   );
 };
 

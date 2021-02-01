@@ -16,6 +16,7 @@ export default () => {
       slidesPerGroup={3}
       loop={true}
       loopFillGroupWithBlank={true}
+      // TODO: set up these two modules correctly
       pagination={{ el: ".swiper-pagination", clickable: true }}
       navigation={{
         nextEl: ".swiper-button-next",
@@ -27,7 +28,6 @@ export default () => {
       <SwiperSlide>Slide 2</SwiperSlide>
       <SwiperSlide>Slide 3</SwiperSlide>
       <SwiperSlide>Slide 4</SwiperSlide>
-      ...
     </Swiper>
   );
 };
