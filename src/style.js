@@ -57,6 +57,9 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: "56.25%",
     overflow: "hidden",
   },
+  aspectRatio: {
+    paddingTop: "56.25%",
+  },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   toolbarButtons: {
