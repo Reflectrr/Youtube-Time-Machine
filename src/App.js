@@ -22,7 +22,19 @@ const App = () => {
     // });
     async function fetchSources() {
       const allVideos = await fetchVideos();
+      const earlyMorningShows = allVideos.filter((v) => v.type === "ems");
+      const chapelVideos = allVideos.filter((v) => v.type === "chapel");
+      const otherVideos = allVideos.filter((v) => v.type === "other");
+      const messageVideos = allVideos.filter((v) => v.type === "message");
+      const newVideos = allVideos.splice(0, 8).sort((v1, v2) => {
+        return v1.date < v2.date ? 1 : -1;
+      });
       dispatch(setVideos(allVideos, "all"));
+      dispatch(setVideos(earlyMorningShows, "ems"));
+      dispatch(setVideos(chapelVideos, "chapel"));
+      dispatch(setVideos(otherVideos, "other"));
+      dispatch(setVideos(messageVideos, "message"));
+      dispatch(setVideos(newVideos, "new"));
     }
     fetchSources();
     dispatch(setClasses(classes));
@@ -33,7 +45,6 @@ const App = () => {
     <div>
       <Navbar />
       <Drawer />
-
       <main className={classes.bigPadding}>
         <Routing />
       </main>

@@ -6,19 +6,14 @@ import VideoCard from "./VideoCard";
 
 SwiperCore.use([Navigation]);
 
-const SwiperComponent = () => {
-  const allVideos = useSelector((state) => state.videos.allVideos);
-  const videos = allVideos
-    .sort((v1, v2) => {
-      return v1.date < v2.date ? 1 : -1;
-    })
-    .splice(0, 8);
-  console.log(videos);
+const SwiperComponent = ({ videos }) => {
+  const classes = useSelector((state) => state.classes);
   const settings = {
     spaceBetween: 30,
     slidesPerView: 4,
     slidesPerGroup: 4,
     navigation: true,
+    className: classes.marginBottom,
   };
   return (
     <Swiper {...settings}>

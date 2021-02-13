@@ -22,6 +22,9 @@ export const customTheme = createMuiTheme({
   },
 });
 export const useStyles = makeStyles((theme) => ({
+  marginBottom: {
+    marginBottom: theme.spacing(2),
+  },
   swiperButtonLeft: {
     position: "absolute",
     color: "#fff",

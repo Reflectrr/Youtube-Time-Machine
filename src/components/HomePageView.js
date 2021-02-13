@@ -11,10 +11,11 @@ const HomePageView = () => {
   // if (!video) return null;
   return (
     <div>
-      <SubsectionRow text="What's New" />
-      {/* <SubsectionRow text="Chapel" />
-      <SubsectionRow text="Early Morning Shows" />
-      <SubsectionRow text="The Message" /> */}
+      <SubsectionRow text="What's New" type="newVideos" />
+      {/* TODO */}
+      <SubsectionRow text="Chapel" type="chapelVideos" />
+      <SubsectionRow text="Early Morning Shows" type="earlyMorningShows" />
+      <SubsectionRow text="The Message" type="messageVideos" />
     </div>
   );
 };
