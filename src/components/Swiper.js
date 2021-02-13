@@ -2,25 +2,26 @@ import React from "react";
 import { useSelector } from "react-redux";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import VideoCard from "./VideoCard";
-import "swiper/swiper-bundle.css";
 
 SwiperCore.use([Navigation]);
 
 const SwiperComponent = () => {
-  const videos = useSelector((state) => state.videos.allVideos.splice(0, 10));
+  const allVideos = useSelector((state) => state.videos.allVideos);
+  const videos = allVideos
+    .sort((v1, v2) => {
+      return v1.date < v2.date ? 1 : -1;
+    })
+    .splice(0, 8);
+  console.log(videos);
+  const settings = {
+    spaceBetween: 30,
+    slidesPerView: 4,
+    slidesPerGroup: 4,
+    navigation: true,
+  };
   return (
-    <Swiper
-      spaceBetween={30}
-      slidesPerView={4}
-      slidesPerGroup={4}
-      loop={true}
-      // TODO: set up these two modules correctly
-      navigation
-      // onSwiper={(swiper) => console.log(swiper)}
-    >
+    <Swiper {...settings}>
       {videos &&
         videos.map((v, n) => {
           return (

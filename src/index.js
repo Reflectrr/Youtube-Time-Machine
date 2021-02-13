@@ -7,6 +7,8 @@ import store from "./store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { customTheme } from "./style";
 import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import "swiper/components/pagination/pagination.scss";
 
 ReactDOM.render(
   <Router>
