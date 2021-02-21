@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuIcon from "@material-ui/icons/Menu";
-import { AppBar, IconButton, Toolbar } from "@material-ui/core";
+import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@material-ui/core";
 import { toggleDrawer } from "../reducers/mobileReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
@@ -10,14 +10,49 @@ const Navbar = () => {
   const classes = useSelector((state) => state.classes);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const onClick = (category, route) => {
-    history.push(route);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const Menu = (
+  const handleClose = (route) => {
+    setAnchorEl(null);
+    if (typeof route === "string") history.push(`/${route}`);
+  };
+
+  const Dropdown = (
+    <div>
+      <Button
+        aria-controls="tv-shows-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+        variant="text"
+        className={classes.toolbarButtons}
+      >
+        TV Shows
+      </Button>
+      <Menu
+        id="tv-shows-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        getContentAnchorEl={null}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        transformOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MenuItem onClick={() => handleClose("ems")}>
+          Early Morning Shows
+        </MenuItem>
+        <MenuItem onClick={() => handleClose("message")}>The Message</MenuItem>
+        <MenuItem onClick={() => handleClose("other")}>The Others</MenuItem>
+      </Menu>
+    </div>
+  );
+  const BarMenu = (
     <>
-      <span style={{ flexGrow: 1 }} />
+      {/* <span style={{ flexGrow: 1 }} /> */}
       <Hidden mdUp>
         <IconButton
           color="inherit"
@@ -33,24 +68,25 @@ const Navbar = () => {
         <Button
           variant="text"
           className={classes.toolbarButtons}
-          onClick={() => onClick("Chapel", "/chapel")}
+          onClick={() => history.push("/")}
+        >
+          Home
+        </Button>
+        {Dropdown}
+        <Button
+          variant="text"
+          className={classes.toolbarButtons}
+          onClick={() => history.push("/chapel")}
         >
           Chapel
         </Button>
         <Button
           variant="text"
           className={classes.toolbarButtons}
-          onClick={() => onClick("EMS", "/ems")}
+          onClick={() => history.push("/about")}
         >
-          Early Morning Show
+          About
         </Button>
-        {/*<Button
-          variant="text"
-          className={classes.toolbarButtons}
-          onClick={() => history.push("/")}
-        >
-          About Us
-        </Button>*/}
       </Hidden>
     </>
   );
@@ -58,16 +94,7 @@ const Navbar = () => {
   return (
     <Toolbar>
       <AppBar position="fixed">
-        <Toolbar>
-          <Button
-            variant="text"
-            className={classes.toolbarButtons}
-            onClick={() => history.push("/")}
-          >
-            VCFilms
-          </Button>
-          {Menu}
-        </Toolbar>
+        <Toolbar>{BarMenu}</Toolbar>
       </AppBar>
     </Toolbar>
   );

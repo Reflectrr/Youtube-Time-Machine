@@ -1,29 +1,42 @@
 import React from "react";
-import VideoView from "../VideoView";
-import AdminView from "../AdminView";
 import { Switch, Route } from "react-router-dom";
-import HomePageView from "../HomePageView";
+import VideoView from "../VideoView";
+import AdminView from "../../pages/AdminView";
+import ChapelView from "../../pages/ChapelView";
+import HomePageView from "../../pages/HomePageView";
+import EMSView from "../../pages/EMSView";
+import MessageView from "../../pages/MessageView";
+import OthersView from "../../pages/OthersView";
+
 import AdminVideoView from "../AdminVideoView";
 
 const Routing = () => {
-  // TODO: change to correct routes
   return (
     <Switch>
-      {/* <Route path="/videos/:id">
-        <VideoView />
-      </Route>
-
-      <Route path="/:category">
-        <VideoView />
-      </Route> */}
-
-      <Route path="/admin/:videoId">
-        <AdminVideoView />
-      </Route>
       <Route path="/admin">
-        <AdminView />
+        <Switch>
+          <Route path="/admin/:videoId">
+            <AdminVideoView />
+          </Route>
+          <Route path="/admin">
+            <AdminView />
+          </Route>
+        </Switch>{" "}
       </Route>
-
+      <Route path="/chapel">
+        <ChapelView />
+      </Route>
+      <Route path="/ems">
+        <EMSView />
+      </Route>
+      <Route path="/message">
+        <MessageView />
+      </Route>
+      <Route path="/other">
+        <OthersView />
+      </Route>
+      {/* TODO: figure out about videos */}
+      <Route path="/about"></Route>
       <Route path="/">
         <HomePageView />
       </Route>

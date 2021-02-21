@@ -8,18 +8,13 @@ const SubsectionRow = ({ text, type }) => {
   const classes = useSelector((state) => state.classes);
   const videosObject = useSelector((state) => state.videos);
   const videos = videosObject[type];
-
-  console.log(type);
-  console.log(videos);
-  if (videos.length === 0) return null;
-  console.log(videos);
   return (
     <React.Fragment>
       <Typography variant="h3" gutterBottom>
         {text}
       </Typography>
 
-      <Swiper videos={videos}></Swiper>
+      {videos && videos.length !== 0 && <Swiper videos={videos}></Swiper>}
     </React.Fragment>
   );
 };

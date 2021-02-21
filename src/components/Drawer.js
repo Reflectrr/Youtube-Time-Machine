@@ -2,7 +2,6 @@ import React from "react";
 import { Drawer, Divider, List, ListItem } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleDrawer } from "../reducers/mobileReducer";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 const DrawerComponent = () => {
@@ -11,13 +10,13 @@ const DrawerComponent = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onClick = (category, route) => {
+  const onClick = (route) => {
     history.push(route);
     dispatch(toggleDrawer());
   };
 
   return (
-    <nav aria-label="mailbox folders">
+    <nav aria-label="navigation drawer">
       <Drawer
         variant="temporary"
         open={mobileOpen}
@@ -37,23 +36,50 @@ const DrawerComponent = () => {
           <List>
             <ListItem
               button
-              key="chapel-of-the-week"
-              onClick={() => onClick("Chapel", "/chapel")}
+              key="burger-list-home"
+              onClick={() => onClick("/")}
             >
-              <Link to="/">Chapel of the Week</Link>
+              Home
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              key="chapel-of-the-week"
+              onClick={() => onClick("/chapel")}
+            >
+              Chapel
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              key="burger-list-ems"
+              onClick={() => onClick("/ems")}
+            >
+              Early Morning Show
             </ListItem>
             <ListItem
               button
-              key="early-moring-show"
-              onClick={() => onClick("EMS", "/ems")}
+              key="burger-list-message"
+              onClick={() => onClick("/message")}
             >
-              <Link to="/">Early Morning Show</Link>
+              The Message
             </ListItem>
-            {/*<ListItem button key="about-us">
-              <Link to="/">About us</Link>
-            </ListItem>*/}
+            <ListItem
+              button
+              key="burger-list-others"
+              onClick={() => onClick("/others")}
+            >
+              The Others
+            </ListItem>
+            <Divider />
+            <ListItem
+              button
+              key="burger-list-about"
+              onClick={() => onClick("/about")}
+            >
+              About Us
+            </ListItem>
           </List>
-          <Divider />
         </div>
       </Drawer>
     </nav>
