@@ -17,6 +17,7 @@ const AdminPasswordField = () => {
         variant="outlined"
         value={password}
         onChange={(event) => dispatch(setPassword(event.target.value))}
+        className={classes.paddingRight}
       />
     </React.Fragment>
   );

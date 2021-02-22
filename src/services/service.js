@@ -21,6 +21,11 @@ export const updateVideo = async (newInfo, videoId) => {
   console.log(response);
   return response;
 };
+
+export const refreshVideos = async () => {
+  const response = await axios.post(`${baseUrl}/api/videos/updateAll`);
+  return response;
+};
 const createHash256 = async (text) => {
   // code copied from https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
   const encoder = new TextEncoder();
