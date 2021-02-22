@@ -8,6 +8,7 @@ SwiperCore.use([Navigation]);
 
 const SwiperComponent = ({ videos }) => {
   const classes = useSelector((state) => state.classes);
+  // TODO: add breakpoints
   const settings = {
     spaceBetween: 30,
     slidesPerView: 4,

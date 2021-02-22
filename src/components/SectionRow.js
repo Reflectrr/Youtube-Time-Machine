@@ -1,11 +1,9 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import Swiper from "./Swiper";
 import { useSelector } from "react-redux";
 
 const SubsectionRow = ({ text, type }) => {
-  //TODO
-  const classes = useSelector((state) => state.classes);
   const videosObject = useSelector((state) => state.videos);
   const videos = videosObject[type];
   return (

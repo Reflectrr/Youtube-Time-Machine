@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import VideoView from "../VideoView";
 import AdminView from "../../pages/AdminView";
 import ChapelView from "../../pages/ChapelView";
 import HomePageView from "../../pages/HomePageView";

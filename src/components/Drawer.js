@@ -66,8 +66,8 @@ const DrawerComponent = () => {
             </ListItem>
             <ListItem
               button
-              key="burger-list-others"
-              onClick={() => onClick("/others")}
+              key="burger-list-other"
+              onClick={() => onClick("/other")}
             >
               The Others
             </ListItem>
