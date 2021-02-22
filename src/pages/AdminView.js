@@ -10,7 +10,6 @@ const AdminView = () => {
 
   return (
     <React.Fragment>
-      {/* TODO: add security */}
       {/* TODO: add refresh button */}
       <ul>
         <ListItem>

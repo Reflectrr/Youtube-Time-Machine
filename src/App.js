@@ -26,7 +26,7 @@ const App = () => {
       const chapelVideos = allVideos.filter((v) => v.type === "chapel");
       const otherVideos = allVideos.filter((v) => v.type === "other");
       const messageVideos = allVideos.filter((v) => v.type === "message");
-      const newVideos = allVideos.splice(0, 8).sort((v1, v2) => {
+      const newVideos = allVideos.slice(0, 8).sort((v1, v2) => {
         return v1.date < v2.date ? 1 : -1;
       });
       dispatch(setVideos(allVideos, "all"));
