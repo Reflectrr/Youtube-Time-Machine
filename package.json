@@ -39,5 +39,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "hubot-heroku-keepalive": "^1.0.3"
+  }
 }
