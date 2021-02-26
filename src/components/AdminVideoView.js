@@ -52,6 +52,7 @@ const AdminVideoView = () => {
     return;
   };
 
+  // TODO: add truncate function
   return (
     <List>
       <ListItem>

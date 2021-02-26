@@ -27,7 +27,6 @@ const AdminView = () => {
   };
   return (
     <React.Fragment>
-      {/* TODO: add refresh button */}
       <ul>
         <ListItem>
           <AdminPasswordField />

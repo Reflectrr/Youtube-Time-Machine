@@ -22,6 +22,24 @@ export const customTheme = createMuiTheme({
   },
 });
 export const useStyles = makeStyles((theme) => ({
+  featuringBox: {
+    height: "300px",
+    display: "flex",
+    alignItems: "center",
+  },
+  featuringTitle: {
+    fontSize: "3rem",
+    fontWeight: "800",
+    paddingBottom: "0.3rem",
+    maxWidth: "360px",
+  },
+  featuringDescription: {
+    lineHeight: "1.3",
+    paddingTop: "1rem",
+    fontSize: "0.8rem",
+    maxWidth: "360px",
+    height: "80px",
+  },
   marginBottom: {
     marginBottom: theme.spacing(2),
   },
