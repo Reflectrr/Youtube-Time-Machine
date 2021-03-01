@@ -72,13 +72,13 @@ const DrawerComponent = () => {
               The Others
             </ListItem>
             <Divider />
-            <ListItem
+            {/* <ListItem
               button
               key="burger-list-about"
               onClick={() => onClick("/about")}
             >
               About Us
-            </ListItem>
+            </ListItem> */}
           </List>
         </div>
       </Drawer>

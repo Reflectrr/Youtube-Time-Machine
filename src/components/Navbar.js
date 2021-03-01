@@ -80,13 +80,13 @@ const Navbar = () => {
         >
           Chapel
         </Button>
-        <Button
+        {/* <Button
           variant="text"
           className={classes.toolbarButtons}
           onClick={() => history.push("/about")}
         >
           About
-        </Button>
+        </Button> */}
       </Hidden>
     </>
   );

@@ -35,7 +35,7 @@ const Routing = () => {
         <OthersView />
       </Route>
       {/* TODO: figure out about videos */}
-      <Route path="/about"></Route>
+      {/* <Route path="/about"></Route> */}
       <Route path="/">
         <HomePageView />
       </Route>

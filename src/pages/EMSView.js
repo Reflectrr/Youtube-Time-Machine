@@ -6,7 +6,7 @@ const EMSView = () => {
   const video = useSelector((state) => state.videos.earlyMorningShows)[0];
   return (
     <React.Fragment>
-      {video && <FeaturingSection video={video} />}
+      {/* {video && <FeaturingSection video={video} />} */}
       <SectionRow text="Early Morning Show" type="earlyMorningShows" />
     </React.Fragment>
   );
