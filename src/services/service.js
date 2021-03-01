@@ -3,10 +3,7 @@ import store from "../store";
 import sha256 from "crypto-js/sha256";
 import BaseHex from "crypto-js/enc-hex";
 
-const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://vcfilms.herokuapp.com"
-    : "http://localhost:3001";
+const baseUrl = "https://vcfilms.herokuapp.com";
 
 export const fetchVideos = async () => {
   const videos = await axios.get(`${baseUrl}/api/videos/all`);

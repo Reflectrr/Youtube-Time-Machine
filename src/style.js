@@ -22,6 +22,10 @@ export const customTheme = createMuiTheme({
   },
 });
 export const useStyles = makeStyles((theme) => ({
+  toolbarLogo: {
+    padding: "2px 0px",
+    height: "60px",
+  },
   featuringBox: {
     height: "300px",
     display: "flex",

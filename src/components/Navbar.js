@@ -53,7 +53,16 @@ const Navbar = () => {
   const BarMenu = (
     <>
       {/* <span style={{ flexGrow: 1 }} /> */}
+      <Button onClick={() => history.push("/")}>
+        <img
+          src="/logo.png"
+          alt=""
+          height="60px"
+          className={classes.toolbarLogo}
+        />
+      </Button>
       <Hidden mdUp>
+        <span style={{ flexGrow: 1 }} />
         <IconButton
           color="inherit"
           aria-label="open drawer"
@@ -65,13 +74,6 @@ const Navbar = () => {
         </IconButton>
       </Hidden>
       <Hidden smDown>
-        <Button
-          variant="text"
-          className={classes.toolbarButtons}
-          onClick={() => history.push("/")}
-        >
-          Home
-        </Button>
         {Dropdown}
         <Button
           variant="text"
@@ -92,11 +94,9 @@ const Navbar = () => {
   );
 
   return (
-    <Toolbar>
-      <AppBar position="fixed">
-        <Toolbar>{BarMenu}</Toolbar>
-      </AppBar>
-    </Toolbar>
+    <AppBar position="sticky">
+      <Toolbar>{BarMenu}</Toolbar>
+    </AppBar>
   );
 };
 
