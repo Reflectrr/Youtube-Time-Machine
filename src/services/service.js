@@ -5,7 +5,7 @@ import BaseHex from "crypto-js/enc-hex";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://vcfilms-backend.herokuapp.com"
+    ? "https://vcfilms.herokuapp.com"
     : "http://localhost:3001";
 
 export const fetchVideos = async () => {
