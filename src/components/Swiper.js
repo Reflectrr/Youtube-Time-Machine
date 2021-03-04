@@ -14,14 +14,13 @@ const SwiperComponent = ({ videos }) => {
     slidesPerGroup: 2,
     navigation: true,
     className: classes.marginBottom,
-    // TODO: optimize checkpoints
     breakpoints: {
-      960: {
+      640: {
         slidesPerView: 3,
         spaceBetween: 30,
         slidesPerGroup: 3,
       },
-      1280: {
+      960: {
         slidesPerView: 4,
         spaceBetween: 40,
         slidesPerGroup: 4,
