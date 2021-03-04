@@ -1,22 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import {
+  createGenerateClassName,
+  CssBaseline,
+  StylesProvider,
+  ThemeProvider,
+} from "@material-ui/core";
 import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { customTheme } from "./style";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
 
-// TODO: add SSL
+const generateClassName = createGenerateClassName({
+  productionPrefix: "app",
+});
+
 ReactDOM.render(
   <Router>
     <Provider store={store}>
       <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        <App />
+        <StylesProvider generateClassName={generateClassName}>
+          <CssBaseline />
+          <App />
+        </StylesProvider>
       </ThemeProvider>
     </Provider>
   </Router>,

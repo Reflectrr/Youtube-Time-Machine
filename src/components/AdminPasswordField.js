@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, TextField } from "@material-ui/core";
+import { Typography, TextField, Box } from "@material-ui/core";
 import { setPassword } from "../reducers/adminReducer";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,13 +12,14 @@ const AdminPasswordField = () => {
       <Typography className={classes.paddingRight}>
         Enter Admin Password To Make Change:{" "}
       </Typography>
-      <TextField
-        type="password"
-        variant="outlined"
-        value={password}
-        onChange={(event) => dispatch(setPassword(event.target.value))}
-        className={classes.paddingRight}
-      />
+      <Box className={classes.paddingRight}>
+        <TextField
+          type="password"
+          variant="outlined"
+          value={password}
+          onChange={(event) => dispatch(setPassword(event.target.value))}
+        />
+      </Box>
     </React.Fragment>
   );
 };

@@ -31,7 +31,6 @@ const DrawerComponent = () => {
       >
         <div>
           <div className={classes.toolbar} />
-          {/*TODO: replace with logo*/}
           <Divider />
           <List>
             <ListItem

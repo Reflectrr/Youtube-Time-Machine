@@ -8,21 +8,19 @@ SwiperCore.use([Navigation]);
 
 const SwiperComponent = ({ videos }) => {
   const classes = useSelector((state) => state.classes);
-  // TODO: add breakpoints
   const settings = {
     spaceBetween: 20,
     slidesPerView: 2,
     slidesPerGroup: 2,
     navigation: true,
     className: classes.marginBottom,
+    // TODO: optimize checkpoints
     breakpoints: {
-      // when window width is >= 480px
       960: {
         slidesPerView: 3,
         spaceBetween: 30,
         slidesPerGroup: 3,
       },
-      // when window width is >= 640px
       1280: {
         slidesPerView: 4,
         spaceBetween: 40,
