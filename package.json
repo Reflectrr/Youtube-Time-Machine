@@ -1,6 +1,7 @@
 {
-  "name": "vcfilms",
+  "name": "project-youtuber-frontend",
   "version": "0.1.0",
+  "description": "frontend for project-youtuber",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
