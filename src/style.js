@@ -125,4 +125,8 @@ export const useStyles = makeStyles((theme) => ({
   centeredText: {
     textAlign: "center",
   },
+  profilePicture: {
+    width: "40px",
+    margin: "5px 10px 5px 5px",
+  },
 }));

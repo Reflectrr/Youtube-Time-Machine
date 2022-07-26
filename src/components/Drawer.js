@@ -43,41 +43,12 @@ const DrawerComponent = () => {
             <Divider />
             <ListItem
               button
-              key="chapel-of-the-week"
-              onClick={() => onClick("/chapel")}
-            >
-              Chapel
-            </ListItem>
-            <Divider />
-            <ListItem
-              button
-              key="burger-list-ems"
-              onClick={() => onClick("/ems")}
-            >
-              Early Morning Show
-            </ListItem>
-            <ListItem
-              button
-              key="burger-list-message"
-              onClick={() => onClick("/message")}
-            >
-              The Message
-            </ListItem>
-            <ListItem
-              button
-              key="burger-list-other"
-              onClick={() => onClick("/other")}
-            >
-              The Others
-            </ListItem>
-            <Divider />
-            {/* <ListItem
-              button
               key="burger-list-about"
               onClick={() => onClick("/about")}
             >
-              About Us
-            </ListItem> */}
+              About
+            </ListItem>
+            <Divider />
           </List>
         </div>
       </Drawer>

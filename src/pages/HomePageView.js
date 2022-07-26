@@ -4,12 +4,6 @@ import AutoComplete from "../components/AutoComplete";
 
 const HomePageView = () => {
   const classes = useSelector((state) => state.classes);
-  // const video = useSelector(
-  //   (state) => state.videos.chapelVideos[state.videos.chapelVideos.length - 1]
-  // );
-  // if (!video) return null;
-  //const { search } = useStyles();
-
   const [showClearIcon, setShowClearIcon] = useState("none");
 
   const handleChange = (event) => {
@@ -23,6 +17,7 @@ const HomePageView = () => {
   return (
     <div>
       <AutoComplete />
+
       {/*
       <SectionRow text="What's New" type="newVideos" />
       <SectionRow text="Chapel" type="chapelVideos" />

@@ -5,6 +5,7 @@ import { createStore, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import changeReducer from "./reducers/changeReducer";
 import adminReducer from "./reducers/adminReducer";
+import userReducer from "./reducers/userReducer";
 
 const reducer = combineReducers({
   videos: videoReducer,
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   drawer: mobileReducer,
   change: changeReducer,
   admin: adminReducer,
+  user: userReducer,
 });
 
 const store = createStore(reducer, composeWithDevTools());
