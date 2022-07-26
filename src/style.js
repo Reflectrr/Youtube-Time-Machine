@@ -1,7 +1,7 @@
-import { createMuiTheme, makeStyles } from "@material-ui/core/styles";
+import { createTheme, makeStyles } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
-export const customTheme = createMuiTheme({
+export const customTheme = createTheme({
   palette: {
     type: "dark",
     primary: {
