@@ -46,8 +46,9 @@ export const getAutoComplete = async (queryTerm) => {
 };
 
 export const getSubscribedChannels = async (token) => {
+  //TODO: change maxresults back to 50
   const response = await axios.get(
-    `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=50&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=1&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -56,12 +57,38 @@ export const getSubscribedChannels = async (token) => {
     }
   );
   console.log(response);
+  return response.data;
 };
 
-export const OAuthRequest = async () => {
-  const response = await axios.get(
-    `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.readonly&include_granted_scopes=true&client_id=864445880843-lafkj1dgakaf8hh8h235i3ngh9q9cou7.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=token&type=pineapple`,
-    { headers: { "Access-Control-Allow-Origin": "*" } }
+export const getChannelVideos = async (channelId, token) => {
+  const channelResponse = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&maxResults=20&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    }
   );
-  console.log(response);
+  const uploadPlaylistId =
+    channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
+  const videosResponse = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${uploadPlaylistId}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    }
+  );
+  const filteredVideos = videosResponse.data.items.map((v) => {
+    const snippet = v.snippet;
+    return {
+      thumbnail: snippet.thumbnails.default.url,
+      videoId: snippet.resourceId.videoId,
+      title: snippet.title,
+    };
+  });
+  console.log(filteredVideos);
+  return filteredVideos;
 };

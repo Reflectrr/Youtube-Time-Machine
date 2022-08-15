@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AutoComplete from "../components/AutoComplete";
+import SectionRow from "../components/SectionRow";
 
 const HomePageView = () => {
-  const classes = useSelector((state) => state.classes);
+  const user = useSelector((state) => state.user);
   const [showClearIcon, setShowClearIcon] = useState("none");
 
   const handleChange = (event) => {
@@ -14,16 +15,21 @@ const HomePageView = () => {
     console.log("clicked the clear icon...");
   };
 
+  const subscriptions = user.subscriptions ? user.subscriptions : [];
+  const SectionRows = subscriptions.map((sub) => {
+    return (
+      <SectionRow
+        text={sub.title}
+        channelId={sub.channelId}
+        token={user.token}
+      />
+    );
+  });
+
   return (
     <div>
       <AutoComplete />
-
-      {/*
-      <SectionRow text="What's New" type="newVideos" />
-      <SectionRow text="Chapel" type="chapelVideos" />
-      <SectionRow text="Early Morning Shows" type="earlyMorningShows" />
-      <SectionRow text="The Message" type="messageVideos" />
-      */}
+      {SectionRows}
     </div>
   );
 };

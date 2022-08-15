@@ -6,7 +6,7 @@ import { setClasses } from "./reducers/styleReducer";
 import Drawer from "./components/Drawer";
 import Routing from "./components/utils/Routing";
 import { parse } from "crypto-js/enc-hex";
-import { setToken } from "./reducers/userReducer";
+import { setToken, setSubscriptions } from "./reducers/userReducer";
 import { getSubscribedChannels } from "./services/service";
 
 const App = () => {
@@ -21,11 +21,23 @@ const App = () => {
     const token = parsedHash.get("access_token");
     const state = parsedHash.get("state");
     if (state === "pineapple" && token != null) {
+      // user authorized
       dispatch(setToken(token));
+      const fetchChannels = async (token) => {
+        const data = await getSubscribedChannels(token);
+        // TODO: fetch all subscriptions
+        const subscriptions = data.items.map((channel) => {
+          const info = channel.snippet;
+          return {
+            title: info.title,
+            thumbnail: info.thumbnails.default.url,
+            channelId: info.resourceId.channelId,
+          };
+        });
+        dispatch(setSubscriptions(subscriptions));
+      };
+      // fetch channels and video thumbnails
       fetchChannels(token);
-    }
-    async function fetchChannels(token) {
-      await getSubscribedChannels(token);
     }
   }, [classes, dispatch]);
 

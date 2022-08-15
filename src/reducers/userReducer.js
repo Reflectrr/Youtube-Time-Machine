@@ -6,6 +6,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state, token: action.token };
     case "SET_USER":
       return { ...state, user: action.user };
+    case "SET_SUBSCRIPTION":
+      return { ...state, subscriptions: action.subscriptions };
     default:
       return state;
   }
@@ -24,4 +26,12 @@ export const setUser = (user) => {
     type: "SET_USER",
   };
 };
+
+export const setSubscriptions = (subscriptions) => {
+  return {
+    subscriptions,
+    type: "SET_SUBSCRIPTION",
+  };
+};
+
 export default userReducer;
