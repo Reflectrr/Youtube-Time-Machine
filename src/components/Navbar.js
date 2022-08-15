@@ -13,8 +13,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
-  const user = useSelector((state) => state.user);
-  console.log(user);
+  const user = useSelector((state) => state.user.user);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -55,7 +54,7 @@ const Navbar = () => {
   //</div>
   //);
 
-  const logInButton = user.name ? (
+  const logInButton = user ? (
     <>
       <img
         src={user.picture}

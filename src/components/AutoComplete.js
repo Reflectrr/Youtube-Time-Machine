@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { getAutoComplete, fetchChannelInformation } from "../services/service";
+import { getAutoComplete } from "../services/service";
 
 const AutoComplete = () => {
   const [suggestions, setSuggestions] = useState([]);
@@ -14,8 +14,9 @@ const AutoComplete = () => {
   };
 
   const selected = async (event) => {
-    console.log(event.target.value);
-    await fetchChannelInformation(event.target.value);
+    //console.log(event.target.value);
+    //await fetchChannelInformation(event.target.value);
+    return null;
   };
 
   return (

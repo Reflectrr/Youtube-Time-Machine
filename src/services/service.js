@@ -45,12 +45,23 @@ export const getAutoComplete = async (queryTerm) => {
   return response;
 };
 
-export const fetchChannelInformation = async (channelName) => {
-  //gapi.client.setApiKey("AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w");
+export const getSubscribedChannels = async (token) => {
   const response = await axios.get(
-    `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&forUsername=${channelName}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`
+    `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=50&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    }
   );
   console.log(response);
+};
 
-  return response;
+export const OAuthRequest = async () => {
+  const response = await axios.get(
+    `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.readonly&include_granted_scopes=true&client_id=864445880843-lafkj1dgakaf8hh8h235i3ngh9q9cou7.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=token&type=pineapple`,
+    { headers: { "Access-Control-Allow-Origin": "*" } }
+  );
+  console.log(response);
 };

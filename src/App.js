@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import { useStyles } from "./style";
-import { fetchVideos } from "./services/service";
 import { useDispatch } from "react-redux";
-import { setVideos } from "./reducers/videoReducer";
 import { setClasses } from "./reducers/styleReducer";
 import Drawer from "./components/Drawer";
 import Routing from "./components/utils/Routing";
+import { parse } from "crypto-js/enc-hex";
+import { setToken } from "./reducers/userReducer";
+import { getSubscribedChannels } from "./services/service";
 
 const App = () => {
   const classes = useStyles();
@@ -14,6 +15,18 @@ const App = () => {
 
   useEffect(() => {
     dispatch(setClasses(classes));
+    const parsedHash = new URLSearchParams(
+      window.location.hash.substring(1) // skip the first char (#)
+    );
+    const token = parsedHash.get("access_token");
+    const state = parsedHash.get("state");
+    if (state === "pineapple" && token != null) {
+      dispatch(setToken(token));
+      fetchChannels(token);
+    }
+    async function fetchChannels(token) {
+      await getSubscribedChannels(token);
+    }
   }, [classes, dispatch]);
 
   return (
