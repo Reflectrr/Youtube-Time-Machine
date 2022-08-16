@@ -84,7 +84,7 @@ export const getChannelVideos = async (channelId, token) => {
   const filteredVideos = videosResponse.data.items.map((v) => {
     const snippet = v.snippet;
     return {
-      thumbnail: snippet.thumbnails.default.url,
+      thumbnail: `https://i.ytimg.com/vi/${snippet.resourceId.videoId}/mqdefault.jpg`,
       videoId: snippet.resourceId.videoId,
       title: snippet.title,
     };

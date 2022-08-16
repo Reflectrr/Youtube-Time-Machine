@@ -9,7 +9,8 @@ const VideoCard = ({ video }) => {
       <a href={`https://youtube.com/watch?v=${video.videoId}`}>
         <CardMedia
           className={classes.aspectRatio}
-          image={`https://i.ytimg.com/vi/${video.videoId}/mqdefault.jpg`}
+          image={video.thumbnail}
+          //image={`https://i.ytimg.com/vi/${video.videoId}/mqdefault.jpg`}
         />
       </a>
       {/* <CardContent></CardContent> */}
