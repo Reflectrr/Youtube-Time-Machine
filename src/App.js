@@ -11,7 +11,7 @@ import {
   getAllChannelVideos,
   getSubscribedChannelIds,
 } from "./services/service";
-import { setVideoInfo } from "./reducers/videoReducer";
+import { setVideoInfo } from "./reducers/channelReducer";
 
 const App = () => {
   const classes = useStyles();

@@ -5,6 +5,7 @@ import SectionRow from "../components/SectionRow";
 
 const HomePageView = () => {
   const user = useSelector((state) => state.user);
+  const channels = useSelector((state) => state.channels);
   const [showClearIcon, setShowClearIcon] = useState("none");
 
   const handleChange = (event) => {
@@ -15,13 +16,13 @@ const HomePageView = () => {
     console.log("clicked the clear icon...");
   };
 
-  const subscriptions = user.subscriptions ? user.subscriptions : [];
-  const SectionRows = subscriptions.map((sub) => {
+  const SectionRows = channels.map((channel, index) => {
     return (
       <SectionRow
-        text={sub.title}
-        channelId={sub.channelId}
+        channel={channel}
+        index={index}
         token={user.token}
+        key={`sectionRow-${channel.channelId}-${index}`}
       />
     );
   });

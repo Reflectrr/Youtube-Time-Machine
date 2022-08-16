@@ -4,20 +4,14 @@ import Swiper from "./Swiper";
 import { useSelector } from "react-redux";
 import { getAllChannelVideos } from "../services/service";
 
-const SubsectionRow = ({ text, channelId, token }) => {
+const SubsectionRow = ({ channel, index, token }) => {
   // TODO: research scroll loading
-  //useEffect(() => {
-  //const fetchVideos = async (channelId) => {
-  //const fetchedVideos = await getAllChannelVideos(channelId, token);
-  //setVideos(fetchedVideos);
-  //};
-  //fetchVideos(channelId);
-  //}, [channelId, text, token]);
-  const videos = null;
+  const videos = channel.videos;
+  const title = channel.title;
   return (
     <React.Fragment>
       <Typography variant="h3" gutterBottom>
-        {text}
+        {title}
       </Typography>
 
       {videos && <Swiper videos={videos}></Swiper>}

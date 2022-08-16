@@ -1,6 +1,6 @@
-const initialState = {};
+const initialState = [];
 
-const videoReducer = (state = initialState, action) => {
+const channelReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_INFO":
       return action.info;
@@ -16,4 +16,4 @@ export const setVideoInfo = (info) => {
   };
 };
 
-export default videoReducer;
+export default channelReducer;

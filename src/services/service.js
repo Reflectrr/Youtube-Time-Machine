@@ -80,9 +80,7 @@ export const getAllChannelVideos = async (channelIds, token) => {
     (item) => item.contentDetails.relatedPlaylists.uploads
   );
   console.log(uploadPlaylistIds);
-  const allVideos = [];
-  const allTitles = [];
-  const allChannelIds = [];
+  const allChannels = [];
   for (const playlistId of uploadPlaylistIds) {
     const videosResponse = await axios.get(
       `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${playlistId}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
@@ -104,10 +102,11 @@ export const getAllChannelVideos = async (channelIds, token) => {
     });
     const channelId = videosResponse.data.items[0].snippet.channelId;
     const channelTitle = videosResponse.data.items[0].snippet.channelTitle;
-    console.log(filteredVideos);
-    allVideos.push(filteredVideos);
-    allChannelIds.push(channelId);
-    allTitles.push(channelTitle);
+    allChannels.push({
+      title: channelTitle,
+      channelId: channelId,
+      videos: filteredVideos,
+    });
   }
-  return { titles: allTitles, channelIds: allChannelIds, videos: allVideos };
+  return allChannels;
 };
