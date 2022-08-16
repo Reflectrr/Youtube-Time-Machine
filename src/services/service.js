@@ -45,10 +45,10 @@ export const getAutoComplete = async (queryTerm) => {
   return response;
 };
 
-export const getSubscribedChannels = async (token) => {
+export const getSubscribedChannelIds = async (token) => {
   //TODO: change maxresults back to 50
   const response = await axios.get(
-    `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=1&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=5&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -56,13 +56,18 @@ export const getSubscribedChannels = async (token) => {
       },
     }
   );
-  console.log(response);
-  return response.data;
+  const channelIds = response.data.items.map(
+    (channel) => channel.snippet.resourceId.channelId
+  );
+  return channelIds;
 };
 
-export const getChannelVideos = async (channelId, token) => {
+export const getAllChannelVideos = async (channelIds, token) => {
+  // channelIds is an array of channelId
+  const channelList = channelIds.map((id) => `&id=${id}`).join("");
+  console.log(channelList);
   const channelResponse = await axios.get(
-    `https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&maxResults=20&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    `https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails${channelList}&maxResults=20&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -70,25 +75,39 @@ export const getChannelVideos = async (channelId, token) => {
       },
     }
   );
-  const uploadPlaylistId =
-    channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
-  const videosResponse = await axios.get(
-    `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${uploadPlaylistId}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: "application/json",
-      },
-    }
+  console.log("channelResponse: ", channelResponse);
+  const uploadPlaylistIds = channelResponse.data.items.map(
+    (item) => item.contentDetails.relatedPlaylists.uploads
   );
-  const filteredVideos = videosResponse.data.items.map((v) => {
-    const snippet = v.snippet;
-    return {
-      thumbnail: `https://i.ytimg.com/vi/${snippet.resourceId.videoId}/mqdefault.jpg`,
-      videoId: snippet.resourceId.videoId,
-      title: snippet.title,
-    };
-  });
-  console.log(filteredVideos);
-  return filteredVideos;
+  console.log(uploadPlaylistIds);
+  const allVideos = [];
+  const allTitles = [];
+  const allChannelIds = [];
+  for (const playlistId of uploadPlaylistIds) {
+    const videosResponse = await axios.get(
+      `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${playlistId}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      }
+    );
+    console.log("videosResponse: ", videosResponse);
+    const filteredVideos = videosResponse.data.items.map((v) => {
+      const snippet = v.snippet;
+      return {
+        thumbnail: `https://i.ytimg.com/vi/${snippet.resourceId.videoId}/mqdefault.jpg`,
+        videoId: snippet.resourceId.videoId,
+        title: snippet.title,
+      };
+    });
+    const channelId = videosResponse.data.items[0].snippet.channelId;
+    const channelTitle = videosResponse.data.items[0].snippet.channelTitle;
+    console.log(filteredVideos);
+    allVideos.push(filteredVideos);
+    allChannelIds.push(channelId);
+    allTitles.push(channelTitle);
+  }
+  return { titles: allTitles, channelIds: allChannelIds, videos: allVideos };
 };

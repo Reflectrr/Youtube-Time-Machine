@@ -5,9 +5,13 @@ import { useDispatch } from "react-redux";
 import { setClasses } from "./reducers/styleReducer";
 import Drawer from "./components/Drawer";
 import Routing from "./components/utils/Routing";
-import { parse } from "crypto-js/enc-hex";
 import { setToken, setSubscriptions } from "./reducers/userReducer";
-import { getSubscribedChannels } from "./services/service";
+import {
+  getSubscribedChannels,
+  getAllChannelVideos,
+  getSubscribedChannelIds,
+} from "./services/service";
+import { setVideoInfo } from "./reducers/videoReducer";
 
 const App = () => {
   const classes = useStyles();
@@ -24,17 +28,12 @@ const App = () => {
       // user authorized
       dispatch(setToken(token));
       const fetchChannels = async (token) => {
-        const data = await getSubscribedChannels(token);
+        const channelIds = await getSubscribedChannelIds(token);
         // TODO: fetch all subscriptions
-        const subscriptions = data.items.map((channel) => {
-          const info = channel.snippet;
-          return {
-            title: info.title,
-            thumbnail: info.thumbnails.default.url,
-            channelId: info.resourceId.channelId,
-          };
-        });
-        dispatch(setSubscriptions(subscriptions));
+        console.log(channelIds);
+        const fetchedVideos = await getAllChannelVideos(channelIds, token);
+        console.log(fetchedVideos);
+        dispatch(setVideoInfo(fetchedVideos));
       };
       // fetch channels and video thumbnails
       fetchChannels(token);
