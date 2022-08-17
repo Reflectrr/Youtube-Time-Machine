@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { getAutoComplete } from "../services/service";
+import { useSelector } from "react-redux";
 
 const AutoComplete = () => {
-  const [suggestions, setSuggestions] = useState([]);
-
-  const onChange = async (event) => {
-    console.log(event.target.value);
-    const response = await getAutoComplete(event.target.value);
-    setSuggestions(response);
-    return;
-  };
-
+  const channels = useSelector((state) => state.channels);
+  const channelNames = channels.map((c) => c.title);
   const selected = async (event) => {
     //console.log(event.target.value);
     //await fetchChannelInformation(event.target.value);
@@ -24,7 +17,7 @@ const AutoComplete = () => {
       freeSolo
       id="free-solo-2-demo"
       disableClearable
-      options={suggestions}
+      options={channelNames}
       onClose={selected}
       autoComplete
       renderInput={(params) => {
@@ -32,7 +25,6 @@ const AutoComplete = () => {
           <TextField
             {...params}
             label="Search input"
-            onChange={onChange}
             InputProps={{
               ...params.InputProps,
               type: "search",

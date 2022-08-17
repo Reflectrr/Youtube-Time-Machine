@@ -24,8 +24,8 @@ export const getUserProfileInfo = async (token, dispatch) => {
 export const verifyToken = async (token, dispatch) => {
   const data = await verifyAccessToken(token);
   console.log("verifyToken: ", data);
-  if (data.expires_in <= 0) {
-    console.log("expired");
+  if (data.error) {
+    console.log("expired or invalid token");
     dispatch(setToken(null));
   }
   return data;

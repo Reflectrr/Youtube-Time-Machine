@@ -1,5 +1,4 @@
 import axios from "axios";
-import jsonpAdapter from "axios-jsonp";
 import store from "../store";
 import sha256 from "crypto-js/sha256";
 import BaseHex from "crypto-js/enc-hex";
@@ -29,20 +28,6 @@ const createHash256 = (text) => {
   const hashArray = sha256(text);
   const hashHex = BaseHex.stringify(hashArray);
   return hashHex;
-};
-
-export const getAutoComplete = async (queryTerm) => {
-  const response = await axios({
-    url: `https://suggestqueries.google.com/complete/search?hl=en&ds=yt&q=${queryTerm}&client=youtube`,
-    adapter: jsonpAdapter,
-  }).then((res) => {
-    const responseData = res.data[1];
-    const suggestions = responseData.map((data) => data[0]);
-    console.log(suggestions);
-    return suggestions;
-  });
-
-  return response;
 };
 
 export const getSubscribedChannelIds = async (token) => {
@@ -132,16 +117,14 @@ export const verifyAccessToken = async (token) => {
       },
     }
   );
-  console.log(response);
+  console.log("verify access token:", response);
   return response.data;
 };
 
 export const revokeToken = async (token) => {
-  const response = await axios.get(`https://oauth2.googleapis.com/revoke`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await axios.post(
+    `https://oauth2.googleapis.com/revoke?token=${token}`
+  );
   console.log(response);
   return response.data;
 };

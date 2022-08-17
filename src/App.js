@@ -9,7 +9,6 @@ import { setToken } from "./reducers/userReducer";
 import {
   fetchChannels,
   getUserProfileInfo,
-  handleCallbackResponse,
   verifyToken,
 } from "./components/utils/asyncFunctions";
 

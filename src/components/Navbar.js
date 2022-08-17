@@ -14,7 +14,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user);
+  const userInfo = user.user;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -58,20 +59,25 @@ const Navbar = () => {
     //TODO: test revoking token
     dispatch(setUser(null));
     dispatch(setVideoInfo([]));
-    //await revokeToken();
+    await revokeToken(user.token);
+    history.push("/");
   };
 
   const logIn = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.readonly&include_granted_scopes=true&client_id=864445880843-lafkj1dgakaf8hh8h235i3ngh9q9cou7.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=token&state=pineapple`;
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube.readonly&include_granted_scopes=true&client_id=864445880843-lafkj1dgakaf8hh8h235i3ngh9q9cou7.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=token&state=pineapple`;
   };
 
-  const button = user ? (
+  const button = userInfo ? (
     <Button variant="text" className={classes.toolbarButtons} onClick={logOut}>
-      <img
-        src={user.picture}
-        alt="profile"
-        className={classes.profilePicture}
-      />
+      {userInfo.picture ? (
+        <img
+          src={userInfo.picture}
+          alt="profile"
+          className={classes.profilePicture}
+        />
+      ) : (
+        ""
+      )}
       Sign Out
     </Button>
   ) : (
