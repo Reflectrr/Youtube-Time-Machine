@@ -1,37 +1,51 @@
-import React, { useState } from "react";
+import React from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedChannel } from "../reducers/channelReducer";
+import { getChannelVideos } from "../services/service";
 
 const AutoComplete = () => {
   const channels = useSelector((state) => state.channels);
+  const user = useSelector((state) => state.user);
   const channelNames = channels.allChannelTitles;
-  const selected = async (event) => {
-    //console.log(event.target.value);
-    //await fetchChannelInformation(event.target.value);
-    return null;
+  const channelIds = channels.allChannelIds;
+  const dispatch = useDispatch();
+  const selected = async (_event, value) => {
+    console.log(value);
+    if (value) {
+      const index = channelNames.indexOf(value);
+      const selectedChannelId = channelIds[index];
+      const selectedChannelVideos = await getChannelVideos(
+        selectedChannelId,
+        user.token
+      );
+      const selectedChannelInfo = {
+        title: value,
+        channelId: selectedChannelId,
+        videos: selectedChannelVideos,
+      };
+      dispatch(setSelectedChannel(selectedChannelInfo));
+    } else {
+      dispatch(setSelectedChannel(null));
+    }
   };
 
   return (
     <Autocomplete
-      freeSolo
-      id="free-solo-2-demo"
-      disableClearable
+      id="combo-box-demo"
       options={channelNames}
-      onClose={selected}
-      autoComplete
-      renderInput={(params) => {
-        return (
-          <TextField
-            {...params}
-            label="Search input"
-            InputProps={{
-              ...params.InputProps,
-              type: "search",
-            }}
-          />
-        );
-      }}
+      //getOptionLabel={(option) => option.title}
+      autoHighlight
+      onChange={selected}
+      style={{ width: 500, margin: "0px auto 20px auto" }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Search your subscribed Youtuber"
+          variant="outlined"
+        />
+      )}
     />
   );
 };

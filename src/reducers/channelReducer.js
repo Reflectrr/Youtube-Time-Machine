@@ -1,4 +1,9 @@
-const initialState = { homepage: [], allChannelTitles: [], allChannelIds: [] };
+const initialState = {
+  homepage: [],
+  allChannelTitles: [],
+  allChannelIds: [],
+  selected: null,
+};
 
 const channelReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,6 +13,8 @@ const channelReducer = (state = initialState, action) => {
       return { ...state, allChannelTitles: action.allChannelTitles };
     case "SET_ALL_CHANNEL_IDS":
       return { ...state, allChannelIds: action.allChannelIds };
+    case "SET_SELETED_CHANNEL":
+      return { ...state, selected: action.channel };
     default:
       return state;
   }
@@ -34,4 +41,10 @@ export const setAllChannelIds = (allChannelIds) => {
   };
 };
 
+export const setSelectedChannel = (channel) => {
+  return {
+    type: "SET_SELETED_CHANNEL",
+    channel,
+  };
+};
 export default channelReducer;

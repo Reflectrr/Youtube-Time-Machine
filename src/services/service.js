@@ -1,38 +1,8 @@
 import axios from "axios";
-import store from "../store";
-import sha256 from "crypto-js/sha256";
-import BaseHex from "crypto-js/enc-hex";
 import {
   setAllChannelIds,
   setAllChannelTitles,
 } from "../reducers/channelReducer";
-
-const baseUrl = "https://vcfilms.herokuapp.com";
-
-export const fetchVideos = async () => {
-  const videos = await axios.get(`${baseUrl}/api/videos/all`);
-  return videos.data;
-};
-
-export const updateVideo = async (newInfo, videoId) => {
-  const password = store.getState().admin.password;
-  const hash = createHash256(password);
-  const response = await axios.put(
-    `${baseUrl}/api/videos/${videoId}?token=${hash}`,
-    newInfo
-  );
-  return response;
-};
-
-export const refreshVideos = async () => {
-  const response = await axios.post(`${baseUrl}/api/videos/updateAll`);
-  return response;
-};
-const createHash256 = (text) => {
-  const hashArray = sha256(text);
-  const hashHex = BaseHex.stringify(hashArray);
-  return hashHex;
-};
 
 export const getSubscribedChannelIds = async (token, dispatch) => {
   const response = await axios.get(
@@ -159,4 +129,39 @@ export const revokeToken = async (token) => {
   );
   console.log(response);
   return response.data;
+};
+
+export const getChannelVideos = async (channelId, token) => {
+  const channelResponse = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&id=${channelId}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    }
+  );
+  console.log("channelResponse: ", channelResponse);
+  const uploadPlaylistId =
+    channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
+  console.log(uploadPlaylistId);
+  const videosResponse = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=48&playlistId=${uploadPlaylistId}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    }
+  );
+  console.log("videosResponse: ", videosResponse);
+  const filteredVideos = videosResponse.data.items.map((v) => {
+    const snippet = v.snippet;
+    return {
+      thumbnail: `https://i.ytimg.com/vi/${snippet.resourceId.videoId}/mqdefault.jpg`,
+      videoId: snippet.resourceId.videoId,
+      title: snippet.title,
+    };
+  });
+  return filteredVideos;
 };

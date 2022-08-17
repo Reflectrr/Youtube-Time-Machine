@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import AutoComplete from "../components/AutoComplete";
 import SectionRow from "../components/SectionRow";
@@ -6,22 +6,13 @@ import SectionRow from "../components/SectionRow";
 const HomePageView = () => {
   const user = useSelector((state) => state.user);
   const channels = useSelector((state) => state.channels);
-  const [showClearIcon, setShowClearIcon] = useState("none");
-
-  const handleChange = (event) => {
-    setShowClearIcon(event.target.value === "" ? "none" : "flex");
-  };
-
-  const handleClick = () => {
-    console.log("clicked the clear icon...");
-  };
+  const selected = channels.selected;
+  console.log("selected", selected);
 
   const SectionRows = channels.homepage.map((channel, index) => {
     return (
       <SectionRow
         channel={channel}
-        index={index}
-        token={user.token}
         key={`sectionRow-${channel.channelId}-${index}`}
       />
     );
@@ -30,7 +21,14 @@ const HomePageView = () => {
   return (
     <div>
       <AutoComplete />
-      {SectionRows}
+      {selected ? (
+        <SectionRow
+          channel={selected}
+          key={`sectionRow-selected-${selected.channelId}`}
+        />
+      ) : (
+        SectionRows
+      )}
     </div>
   );
 };
