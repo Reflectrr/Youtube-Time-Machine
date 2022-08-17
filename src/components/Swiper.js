@@ -27,7 +27,6 @@ const SwiperComponent = ({ videos }) => {
       },
     },
   };
-  console.log(videos);
   return (
     <Swiper {...settings}>
       {videos &&

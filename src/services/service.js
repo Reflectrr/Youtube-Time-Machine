@@ -46,7 +46,7 @@ export const getAutoComplete = async (queryTerm) => {
 };
 
 export const getSubscribedChannelIds = async (token) => {
-  //TODO: change maxresults back to 50
+  //TODO: change maxresults back to 10
   const response = await axios.get(
     `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=5&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
@@ -65,7 +65,7 @@ export const getSubscribedChannelIds = async (token) => {
 export const getAllChannelVideos = async (channelIds, token) => {
   // channelIds is an array of channelId
   const channelList = channelIds.map((id) => `&id=${id}`).join("");
-  console.log(channelList);
+  //console.log(channelList);
   const channelResponse = await axios.get(
     `https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails${channelList}&maxResults=20&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
@@ -75,11 +75,11 @@ export const getAllChannelVideos = async (channelIds, token) => {
       },
     }
   );
-  console.log("channelResponse: ", channelResponse);
+  //console.log("channelResponse: ", channelResponse);
   const uploadPlaylistIds = channelResponse.data.items.map(
     (item) => item.contentDetails.relatedPlaylists.uploads
   );
-  console.log(uploadPlaylistIds);
+  //console.log(uploadPlaylistIds);
   const allChannels = [];
   for (const playlistId of uploadPlaylistIds) {
     const videosResponse = await axios.get(
@@ -91,7 +91,7 @@ export const getAllChannelVideos = async (channelIds, token) => {
         },
       }
     );
-    console.log("videosResponse: ", videosResponse);
+    //console.log("videosResponse: ", videosResponse);
     const filteredVideos = videosResponse.data.items.map((v) => {
       const snippet = v.snippet;
       return {
@@ -109,4 +109,17 @@ export const getAllChannelVideos = async (channelIds, token) => {
     });
   }
   return allChannels;
+};
+
+export const getUserProfile = async (token) => {
+  const response = await axios.get(
+    `https://www.googleapis.com/oauth2/v1/userinfo`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  console.log(response);
+  return response.data;
 };
