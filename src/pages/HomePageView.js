@@ -16,7 +16,7 @@ const HomePageView = () => {
     console.log("clicked the clear icon...");
   };
 
-  const SectionRows = channels.map((channel, index) => {
+  const SectionRows = channels.homepage.map((channel, index) => {
     return (
       <SectionRow
         channel={channel}

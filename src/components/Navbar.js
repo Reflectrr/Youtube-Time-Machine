@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { setUser } from "../reducers/userReducer";
-import { setVideoInfo } from "../reducers/channelReducer";
+import { setHomepageInfo } from "../reducers/channelReducer";
 import { revokeToken } from "../services/service";
 
 const Navbar = () => {
@@ -56,9 +56,8 @@ const Navbar = () => {
   //</div>
   //);
   const logOut = async () => {
-    //TODO: test revoking token
     dispatch(setUser(null));
-    dispatch(setVideoInfo([]));
+    dispatch(setHomepageInfo([]));
     await revokeToken(user.token);
     history.push("/");
   };

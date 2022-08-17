@@ -2,6 +2,10 @@ import axios from "axios";
 import store from "../store";
 import sha256 from "crypto-js/sha256";
 import BaseHex from "crypto-js/enc-hex";
+import {
+  setAllChannelIds,
+  setAllChannelTitles,
+} from "../reducers/channelReducer";
 
 const baseUrl = "https://vcfilms.herokuapp.com";
 
@@ -30,10 +34,9 @@ const createHash256 = (text) => {
   return hashHex;
 };
 
-export const getSubscribedChannelIds = async (token) => {
-  //TODO: change maxresults back to 10
+export const getSubscribedChannelIds = async (token, dispatch) => {
   const response = await axios.get(
-    `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=5&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
+    `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=50&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,10 +44,40 @@ export const getSubscribedChannelIds = async (token) => {
       },
     }
   );
-  const channelIds = response.data.items.map(
-    (channel) => channel.snippet.resourceId.channelId
+  const allChannelTitles = response.data.items.map(
+    (item) => item.snippet.title
   );
-  return channelIds;
+  const allChannelIds = response.data.items.map(
+    (item) => item.snippet.resourceId.channelId
+  );
+  let nextPageToken = response.data.nextPageToken;
+  while (nextPageToken) {
+    const moreResponse = await axios.get(
+      `https://youtube.googleapis.com/youtube/v3/subscriptions?part=snippet%2CcontentDetails&maxResults=50&mine=true&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w&pageToken=${nextPageToken}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      }
+    );
+    nextPageToken = moreResponse.data.nextPageToken;
+
+    const moreChannelTitles = moreResponse.data.items.map(
+      (item) => item.snippet.title
+    );
+    const moreChannelIds = moreResponse.data.items.map(
+      (item) => item.snippet.resourceId.channelId
+    );
+    allChannelTitles.push(...moreChannelTitles);
+    allChannelIds.push(...moreChannelIds);
+    console.log(moreResponse.data);
+  }
+  console.log(allChannelIds);
+  console.log(allChannelTitles);
+  dispatch(setAllChannelIds(allChannelIds));
+  dispatch(setAllChannelTitles(allChannelTitles));
+  return allChannelIds;
 };
 
 export const getAllChannelVideos = async (channelIds, token) => {
@@ -117,7 +150,6 @@ export const verifyAccessToken = async (token) => {
       },
     }
   );
-  console.log("verify access token:", response);
   return response.data;
 };
 

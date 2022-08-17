@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const AutoComplete = () => {
   const channels = useSelector((state) => state.channels);
-  const channelNames = channels.map((c) => c.title);
+  const channelNames = channels.allChannelTitles;
   const selected = async (event) => {
     //console.log(event.target.value);
     //await fetchChannelInformation(event.target.value);
