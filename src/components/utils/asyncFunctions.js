@@ -2,9 +2,10 @@ import {
   getAllChannelVideos,
   getSubscribedChannelIds,
   getUserProfile,
+  verifyAccessToken,
 } from "../../services/service";
 import { setVideoInfo } from "../../reducers/channelReducer";
-import { setUser } from "../../reducers/userReducer";
+import { setUser, setToken } from "../../reducers/userReducer";
 
 export const fetchChannels = async (token, dispatch) => {
   const channelIds = await getSubscribedChannelIds(token);
@@ -17,10 +18,15 @@ export const fetchChannels = async (token, dispatch) => {
 
 export const getUserProfileInfo = async (token, dispatch) => {
   const data = await getUserProfile(token);
-  console.log(data);
   dispatch(setUser(data));
 };
 
-export const handleCallbackResponse = async () => {
-  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.readonly&include_granted_scopes=true&client_id=864445880843-lafkj1dgakaf8hh8h235i3ngh9q9cou7.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=token&state=pineapple`;
+export const verifyToken = async (token, dispatch) => {
+  const data = await verifyAccessToken(token);
+  console.log("verifyToken: ", data);
+  if (data.expires_in <= 0) {
+    console.log("expired");
+    dispatch(setToken(null));
+  }
+  return data;
 };

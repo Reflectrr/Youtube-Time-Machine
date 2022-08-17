@@ -5,8 +5,9 @@ import { toggleDrawer } from "../reducers/mobileReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import OAuth from "./OAuth";
 import { setUser } from "../reducers/userReducer";
+import { setVideoInfo } from "../reducers/channelReducer";
+import { revokeToken } from "../services/service";
 
 const Navbar = () => {
   const classes = useSelector((state) => state.classes);
@@ -53,18 +54,30 @@ const Navbar = () => {
   //</Menu>
   //</div>
   //);
+  const logOut = async () => {
+    //TODO: test revoking token
+    dispatch(setUser(null));
+    dispatch(setVideoInfo([]));
+    //await revokeToken();
+  };
 
-  const logInButton = user ? (
-    <>
+  const logIn = () => {
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/youtube.readonly&include_granted_scopes=true&client_id=864445880843-lafkj1dgakaf8hh8h235i3ngh9q9cou7.apps.googleusercontent.com&redirect_uri=http://localhost:3000&response_type=token&state=pineapple`;
+  };
+
+  const button = user ? (
+    <Button variant="text" className={classes.toolbarButtons} onClick={logOut}>
       <img
         src={user.picture}
         alt="profile"
         className={classes.profilePicture}
       />
-      Sign out
-    </>
+      Sign Out
+    </Button>
   ) : (
-    <OAuth />
+    <Button variant="text" className={classes.toolbarButtons} onClick={logIn}>
+      Sign in to your Youtube account
+    </Button>
   );
 
   const BarMenu = (
@@ -95,15 +108,7 @@ const Navbar = () => {
           <MenuIcon />
         </IconButton>
       </Hidden>*/}
-      <Hidden smDown>
-        <Button
-          variant="text"
-          className={classes.toolbarButtons}
-          onClick={() => dispatch(setUser({}))}
-        >
-          {logInButton}
-        </Button>
-      </Hidden>
+      <Hidden smDown>{button}</Hidden>
     </>
   );
 

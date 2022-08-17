@@ -120,6 +120,28 @@ export const getUserProfile = async (token) => {
       },
     }
   );
+  return response.data;
+};
+
+export const verifyAccessToken = async (token) => {
+  const response = await axios.get(
+    `https://www.googleapis.com/oauth2/v1/tokeninfo`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  console.log(response);
+  return response.data;
+};
+
+export const revokeToken = async (token) => {
+  const response = await axios.get(`https://oauth2.googleapis.com/revoke`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   console.log(response);
   return response.data;
 };

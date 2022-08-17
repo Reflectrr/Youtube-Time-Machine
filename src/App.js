@@ -10,6 +10,7 @@ import {
   fetchChannels,
   getUserProfileInfo,
   handleCallbackResponse,
+  verifyToken,
 } from "./components/utils/asyncFunctions";
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
       if (state === "pineapple") {
         // found token in the url
         dispatch(setToken(token));
+        verifyToken(token);
         // fetch channels and video thumbnails
         fetchChannels(token, dispatch);
         getUserProfileInfo(token, dispatch);
