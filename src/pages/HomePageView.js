@@ -20,7 +20,6 @@ const HomePageView = () => {
 
   return (
     <div>
-      <AutoComplete />
       {selected ? (
         <SectionRow
           channel={selected}

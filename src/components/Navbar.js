@@ -6,8 +6,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { setUser } from "../reducers/userReducer";
-import { setHomepageInfo } from "../reducers/channelReducer";
+import {
+  setHomepageInfo,
+  setSelectedChannel,
+} from "../reducers/channelReducer";
 import { revokeToken } from "../services/service";
+import AutoComplete from "./AutoComplete";
 
 const Navbar = () => {
   const classes = useSelector((state) => state.classes);
@@ -90,7 +94,10 @@ const Navbar = () => {
       <Button
         variant="text"
         className={classes.toolbarButtons}
-        onClick={() => history.push("/")}
+        onClick={() => {
+          history.push("/");
+          dispatch(setSelectedChannel(null));
+        }}
       >
         Home
       </Button>
@@ -113,6 +120,8 @@ const Navbar = () => {
           <MenuIcon />
         </IconButton>
       </Hidden>*/}
+      <AutoComplete />
+
       <Hidden smDown>{button}</Hidden>
     </>
   );

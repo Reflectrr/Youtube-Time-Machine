@@ -38,7 +38,8 @@ const AutoComplete = () => {
       //getOptionLabel={(option) => option.title}
       autoHighlight
       onChange={selected}
-      style={{ width: 500, margin: "0px auto 20px auto" }}
+      style={{ width: 300, margin: "10px" }}
+      noOptionsText="Please sign in first"
       renderInput={(params) => (
         <TextField
           {...params}
