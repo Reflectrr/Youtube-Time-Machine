@@ -4,7 +4,7 @@ import { AppBar, Toolbar } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { setUser } from "../reducers/userReducer";
+import { setUser, setToken } from "../reducers/userReducer";
 import {
   setHomepageInfo,
   setSelectedChannel,
@@ -15,11 +15,11 @@ import AutoComplete from "./AutoComplete";
 
 const Navbar = () => {
   const classes = useSelector((state) => state.classes);
+  const user = useSelector((state) => state.user);
+  const userInfo = user.user;
   const dispatch = useDispatch();
   const history = useHistory();
   const [inputValue, setInputValue] = useState(null);
-  const user = useSelector((state) => state.user);
-  const userInfo = user.user;
 
   //const Dropdown = (
   //<div>
@@ -51,10 +51,11 @@ const Navbar = () => {
   //</div>
   //);
   const logOut = async () => {
-    dispatch(setUser(null));
-    dispatch(setHomepageInfo([]));
-    await revokeToken(user.token);
     history.push("/");
+    await revokeToken(user.token);
+    dispatch(setUser(null));
+    dispatch(setToken(null));
+    dispatch(setHomepageInfo([]));
     setInputValue(null);
   };
 
@@ -76,7 +77,11 @@ const Navbar = () => {
       Sign Out
     </Button>
   ) : (
-    <Button variant="text" className={classes.toolbarButtons} onClick={logIn}>
+    <Button
+      variant="contained"
+      className={classes.toolbarButtons}
+      onClick={logIn}
+    >
       Sign in to your Youtube account
     </Button>
   );
@@ -113,7 +118,7 @@ const Navbar = () => {
           <MenuIcon />
         </IconButton>
       </Hidden>*/}
-      <AutoComplete inputValue={inputValue} />
+      {user.token && <AutoComplete inputValue={inputValue} />}
 
       <Hidden smDown>{button}</Hidden>
     </>

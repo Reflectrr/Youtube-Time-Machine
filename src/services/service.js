@@ -3,6 +3,7 @@ import {
   setAllChannelIds,
   setAllChannelTitles,
 } from "../reducers/channelReducer";
+import { shuffle } from "../utils";
 
 export const getSubscribedChannelIds = async (token, dispatch) => {
   const response = await axios.get(
@@ -73,14 +74,16 @@ export const getAllChannelVideos = async (channelIds, token) => {
         },
       }
     );
-    const filteredVideos = videosResponse.data.items.map((v) => {
-      const snippet = v.snippet;
-      return {
-        thumbnail: `https://i.ytimg.com/vi/${snippet.resourceId.videoId}/mqdefault.jpg`,
-        videoId: snippet.resourceId.videoId,
-        title: snippet.title,
-      };
-    });
+    const filteredVideos = shuffle(
+      videosResponse.data.items.map((v) => {
+        const snippet = v.snippet;
+        return {
+          thumbnail: `https://i.ytimg.com/vi/${snippet.resourceId.videoId}/mqdefault.jpg`,
+          videoId: snippet.resourceId.videoId,
+          title: snippet.title,
+        };
+      })
+    );
     const channelId = videosResponse.data.items[0].snippet.channelId;
     const channelTitle = videosResponse.data.items[0].snippet.channelTitle;
     allChannels.push({
