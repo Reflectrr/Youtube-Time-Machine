@@ -6,6 +6,7 @@ const SubsectionRow = ({ channel }) => {
   // TODO: research scroll loading
   const videos = channel.videos;
   const title = channel.title;
+  const channelId = channel.channelId;
   console.log(title);
   return (
     <React.Fragment>
@@ -13,7 +14,7 @@ const SubsectionRow = ({ channel }) => {
         {title}
       </Typography>
 
-      {videos && <Swiper videos={videos}></Swiper>}
+      {videos && <Swiper channel={channel} videos={videos}></Swiper>}
     </React.Fragment>
   );
 };

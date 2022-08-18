@@ -27,15 +27,15 @@ export const useStyles = makeStyles((theme) => ({
     height: "60px",
   },
   featuringBox: {
-    height: "300px",
-    display: "flex",
-    alignItems: "center",
+    //height: "300px",
+    //display: "flex",
+    //alignItems: "center",
   },
   featuringTitle: {
-    fontSize: "3rem",
-    fontWeight: "800",
-    paddingBottom: "0.3rem",
-    maxWidth: "360px",
+    //fontSize: "3rem",
+    //fontWeight: "800",
+    //paddingBottom: "0.3rem",
+    //maxWidth: "360px",
   },
   featuringDescription: {
     lineHeight: "1.3",
@@ -93,9 +93,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   iframeContainer: {
     display: "flex",
-    justifyContent: "center",
+    //justifyContent: "center",
     position: "relative",
-    paddingTop: "56.25%",
+    paddingBottom: "45%",
     overflow: "hidden",
   },
   aspectRatio: {

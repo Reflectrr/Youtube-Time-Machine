@@ -7,7 +7,7 @@ import { Typography } from "@material-ui/core";
 
 SwiperCore.use([Navigation]);
 
-const SwiperComponent = ({ videos }) => {
+const SwiperComponent = ({ videos, channel }) => {
   const classes = useSelector((state) => state.classes);
   const settings = {
     spaceBetween: 20,
@@ -34,7 +34,7 @@ const SwiperComponent = ({ videos }) => {
         videos.map((v, n) => {
           return (
             <SwiperSlide key={`videoCard-${v.videoId}-${n}`}>
-              <VideoCard video={v}></VideoCard>
+              <VideoCard video={v} channel={channel}></VideoCard>
               <Typography variant="subtitle1">{v.title}</Typography>
             </SwiperSlide>
           );

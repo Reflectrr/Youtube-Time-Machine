@@ -1,20 +1,29 @@
-import { Card, CardMedia } from "@material-ui/core";
+import { Card, CardMedia, Box, Link, Button } from "@material-ui/core";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setSelectedVideo,
+  setSelectedChannel,
+} from "../reducers/channelReducer";
 
-const VideoCard = ({ video }) => {
+const VideoCard = ({ video, channel }) => {
   const classes = useSelector((state) => state.classes);
+  const dispatch = useDispatch();
+  const setVideo = () => {
+    const videoInfo = {
+      ...video,
+      channelId: channel.channelId,
+      channelTitle: channel.title,
+    };
+    dispatch(setSelectedVideo(videoInfo));
+    dispatch(setSelectedChannel(channel));
+  };
   return (
-    <Card variant="outlined">
-      <a href={`https://youtube.com/watch?v=${video.videoId}`}>
-        <CardMedia
-          className={classes.aspectRatio}
-          image={video.thumbnail}
-          //image={`https://i.ytimg.com/vi/${video.videoId}/mqdefault.jpg`}
-        />
-      </a>
-      {/* <CardContent></CardContent> */}
-    </Card>
+    <Button onClick={setVideo} style={{ display: "block", width: "100%" }}>
+      <Card variant="outlined">
+        <CardMedia className={classes.aspectRatio} image={video.thumbnail} />
+      </Card>
+    </Button>
   );
 };
 

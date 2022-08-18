@@ -7,23 +7,26 @@ const FeaturingSection = ({ video }) => {
   const classes = useSelector((state) => state.classes);
   console.log(video);
   return (
-    <Box
-      className={classes.featuringBox}
-      style={{
-        backgroundImage: `url(https://i.ytimg.com/vi/${video.videoId}/maxresdefault.jpg)`,
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "contain",
-      }}
-    >
-      <header></header>
-      <Box>
-        <Typography component="h1" className={classes.featuringTitle}>
-          {video.title}
-        </Typography>
-        <Button variant="contained">Play</Button>
-        <Typography component="h2" className={classes.featuringDescription}>
-          {video.description}
-        </Typography>
+    <Box>
+      <Typography variant="h3" className={classes.featuringTitle}>
+        You're now watching: {video.channelTitle}
+      </Typography>
+      <Box className={classes.iframeContainer}>
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "10%",
+            width: "80%",
+            height: "100%",
+            padding: "10px",
+          }}
+        />
       </Box>
     </Box>
   );

@@ -8,6 +8,7 @@ import { setUser } from "../reducers/userReducer";
 import {
   setHomepageInfo,
   setSelectedChannel,
+  setSelectedVideo,
 } from "../reducers/channelReducer";
 import { revokeToken } from "../services/service";
 import AutoComplete from "./AutoComplete";
@@ -88,6 +89,7 @@ const Navbar = () => {
         onClick={() => {
           history.push("/");
           dispatch(setSelectedChannel(null));
+          dispatch(setSelectedVideo(null));
         }}
       >
         Home

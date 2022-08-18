@@ -2,7 +2,10 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { useSelector, useDispatch } from "react-redux";
-import { setSelectedChannel } from "../reducers/channelReducer";
+import {
+  setSelectedChannel,
+  setSelectedVideo,
+} from "../reducers/channelReducer";
 import { getChannelVideos } from "../services/service";
 
 const AutoComplete = ({ inputValue }) => {
@@ -12,7 +15,6 @@ const AutoComplete = ({ inputValue }) => {
   const channelIds = channels.allChannelIds;
   const dispatch = useDispatch();
   const selected = async (_event, value) => {
-    console.log(value);
     if (value) {
       const index = channelNames.indexOf(value);
       const selectedChannelId = channelIds[index];
@@ -26,6 +28,7 @@ const AutoComplete = ({ inputValue }) => {
         videos: selectedChannelVideos,
       };
       dispatch(setSelectedChannel(selectedChannelInfo));
+      dispatch(setSelectedVideo(null));
     } else {
       dispatch(setSelectedChannel(null));
     }
