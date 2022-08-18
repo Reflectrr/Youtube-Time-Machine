@@ -6,11 +6,7 @@ import { setClasses } from "./reducers/styleReducer";
 import Drawer from "./components/Drawer";
 import Routing from "./components/utils/Routing";
 import { setToken } from "./reducers/userReducer";
-import {
-  fetchChannels,
-  getUserProfileInfo,
-  verifyToken,
-} from "./components/utils/asyncFunctions";
+import { fetchChannels, getUserProfileInfo, verifyToken } from "./utils";
 
 const App = () => {
   const classes = useStyles();

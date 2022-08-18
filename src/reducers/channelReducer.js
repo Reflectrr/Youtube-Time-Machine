@@ -18,6 +18,25 @@ const channelReducer = (state = initialState, action) => {
       return { ...state, selectedChannel: action.channel };
     case "SET_SELECTED_VIDEO":
       return { ...state, selectedVideo: action.video };
+    case "SET_CHANNEL_VIDEOS":
+      if (
+        state.selectedChannel &&
+        state.selectedChannel.channelId === action.channelId
+      ) {
+        const selectedChannel = state.selectedChannel;
+        selectedChannel.videos = action.videos;
+        return { ...state, selectedChannel: selectedChannel };
+      } else {
+        // go through homepage to find the channel
+        const homepageChannels = state.homepage;
+        const index = homepageChannels.indexOf(
+          homepageChannels.filter(
+            (channel) => channel.channelId === action.channelId
+          )[0]
+        );
+        homepageChannels[index].videos = action.videos;
+        return { ...state, homepage: homepageChannels };
+      }
     default:
       return state;
   }
@@ -55,6 +74,14 @@ export const setSelectedVideo = (video) => {
   return {
     type: "SET_SELECTED_VIDEO",
     video,
+  };
+};
+
+export const setChannelVideos = (channelId, videos) => {
+  return {
+    type: "SET_CHANNEL_VIDEOS",
+    channelId,
+    videos,
   };
 };
 export default channelReducer;

@@ -1,8 +1,7 @@
-import { Box, Button, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
 
-// TODO: finish this component
 const FeaturingSection = ({ video }) => {
   const classes = useSelector((state) => state.classes);
   console.log(video);
@@ -15,9 +14,9 @@ const FeaturingSection = ({ video }) => {
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
           title="YouTube video player"
-          frameborder="0"
+          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          allowFullScreen
           style={{
             position: "absolute",
             top: 0,

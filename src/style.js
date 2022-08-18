@@ -107,6 +107,11 @@ export const useStyles = makeStyles((theme) => ({
     color: "white",
     fontSize: "18px",
   },
+  shuffleButtons: {
+    fontSize: "18px",
+    margin: "auto",
+    height: "100%",
+  },
   drawerPaper: {
     width: drawerWidth,
   },
