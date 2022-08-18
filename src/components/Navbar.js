@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar } from "@material-ui/core";
-import { toggleDrawer } from "../reducers/mobileReducer";
+//import { toggleDrawer } from "../reducers/mobileReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
@@ -16,7 +16,6 @@ const Navbar = () => {
   const classes = useSelector((state) => state.classes);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [anchorEl, setAnchorEl] = useState(null);
   const [inputValue, setInputValue] = useState(null);
   const user = useSelector((state) => state.user);
   const userInfo = user.user;

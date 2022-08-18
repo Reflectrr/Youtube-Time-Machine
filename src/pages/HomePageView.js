@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import SectionRow from "../components/SectionRow";
+import FeaturingSection from "../components/FeaturingSection";
 
 const HomePageView = () => {
   const channels = useSelector((state) => state.channels);
   const selectedChannel = channels.selectedChannel;
+  const selectedVideo = channels.selectedVideo;
 
   const SectionRows = channels.homepage.map((channel, index) => {
     return (
@@ -17,6 +19,8 @@ const HomePageView = () => {
 
   return (
     <div>
+      {selectedVideo && <FeaturingSection video={selectedVideo} />}
+
       {selectedChannel ? (
         <SectionRow
           channel={selectedChannel}

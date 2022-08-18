@@ -14,8 +14,10 @@ const channelReducer = (state = initialState, action) => {
       return { ...state, allChannelTitles: action.allChannelTitles };
     case "SET_ALL_CHANNEL_IDS":
       return { ...state, allChannelIds: action.allChannelIds };
-    case "SET_SELETED_CHANNEL":
+    case "SET_SELECTED_CHANNEL":
       return { ...state, selectedChannel: action.channel };
+    case "SET_SELECTED_VIDEO":
+      return { ...state, selectedVideo: action.video };
     default:
       return state;
   }
@@ -44,8 +46,15 @@ export const setAllChannelIds = (allChannelIds) => {
 
 export const setSelectedChannel = (channel) => {
   return {
-    type: "SET_SELETED_CHANNEL",
+    type: "SET_SELECTED_CHANNEL",
     channel,
+  };
+};
+
+export const setSelectedVideo = (video) => {
+  return {
+    type: "SET_SELECTED_VIDEO",
+    video,
   };
 };
 export default channelReducer;
