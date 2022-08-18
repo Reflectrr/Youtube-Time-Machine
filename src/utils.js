@@ -10,10 +10,8 @@ import { setUser, setToken } from "./reducers/userReducer";
 export const fetchChannels = async (token, dispatch) => {
   // TODO: fetch all subscriptions
   const channelIds = await getSubscribedChannelIds(token, dispatch);
-  //console.log(channelIds);
   const channelsHomepage = channelIds.slice(0, 5);
   const fetchedVideos = await getAllChannelVideos(channelsHomepage, token);
-  //console.log(fetchedVideos);
   dispatch(setHomepageInfo(fetchedVideos));
 };
 
@@ -33,7 +31,6 @@ export const verifyToken = async (token, dispatch) => {
 
 // credit: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 export const shuffle = (array) => {
-  console.log("array: ", array);
   let currentIndex = array.length,
     randomIndex;
 

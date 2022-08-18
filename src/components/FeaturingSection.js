@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const FeaturingSection = ({ video }) => {
   const classes = useSelector((state) => state.classes);
-  console.log(video);
   return (
     <Box>
       <Typography variant="h3" className={classes.featuringTitle}>

@@ -13,7 +13,6 @@ const SubsectionRow = ({ channel }) => {
   const videos = channel.videos;
   const title = channel.title;
   const shuffleVideos = () => {
-    console.log(channel);
     const shuffledVideos = shuffle(channel.videos);
     dispatch(setChannelVideos(channel.channelId, shuffledVideos));
   };

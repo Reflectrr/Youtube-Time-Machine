@@ -41,10 +41,7 @@ export const getSubscribedChannelIds = async (token, dispatch) => {
     );
     allChannelTitles.push(...moreChannelTitles);
     allChannelIds.push(...moreChannelIds);
-    console.log(moreResponse.data);
   }
-  console.log(allChannelIds);
-  console.log(allChannelTitles);
   dispatch(setAllChannelIds(allChannelIds));
   dispatch(setAllChannelTitles(allChannelTitles));
   return allChannelIds;
@@ -53,7 +50,6 @@ export const getSubscribedChannelIds = async (token, dispatch) => {
 export const getAllChannelVideos = async (channelIds, token) => {
   // channelIds is an array of channelId
   const channelList = channelIds.map((id) => `&id=${id}`).join("");
-  //console.log(channelList);
   const channelResponse = await axios.get(
     `https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails${channelList}&maxResults=20&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
@@ -63,11 +59,9 @@ export const getAllChannelVideos = async (channelIds, token) => {
       },
     }
   );
-  //console.log("channelResponse: ", channelResponse);
   const uploadPlaylistIds = channelResponse.data.items.map(
     (item) => item.contentDetails.relatedPlaylists.uploads
   );
-  //console.log(uploadPlaylistIds);
   const allChannels = [];
   for (const playlistId of uploadPlaylistIds) {
     const videosResponse = await axios.get(
@@ -79,7 +73,6 @@ export const getAllChannelVideos = async (channelIds, token) => {
         },
       }
     );
-    //console.log("videosResponse: ", videosResponse);
     const filteredVideos = videosResponse.data.items.map((v) => {
       const snippet = v.snippet;
       return {
@@ -127,7 +120,6 @@ export const revokeToken = async (token) => {
   const response = await axios.post(
     `https://oauth2.googleapis.com/revoke?token=${token}`
   );
-  console.log(response);
   return response.data;
 };
 
@@ -141,10 +133,8 @@ export const getChannelVideos = async (channelId, token) => {
       },
     }
   );
-  console.log("channelResponse: ", channelResponse);
   const uploadPlaylistId =
     channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
-  console.log(uploadPlaylistId);
   const videosResponse = await axios.get(
     `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=48&playlistId=${uploadPlaylistId}&key=AIzaSyDOUp35AeuxBSdyGMdwCRdQY8P8hLWpa6w`,
     {
@@ -154,7 +144,6 @@ export const getChannelVideos = async (channelId, token) => {
       },
     }
   );
-  console.log("videosResponse: ", videosResponse);
   const filteredVideos = videosResponse.data.items.map((v) => {
     const snippet = v.snippet;
     return {
