@@ -2,7 +2,8 @@ const initialState = {
   homepage: [],
   allChannelTitles: [],
   allChannelIds: [],
-  selected: null,
+  selectedChannel: null,
+  selectedVideo: null,
 };
 
 const channelReducer = (state = initialState, action) => {
@@ -14,7 +15,7 @@ const channelReducer = (state = initialState, action) => {
     case "SET_ALL_CHANNEL_IDS":
       return { ...state, allChannelIds: action.allChannelIds };
     case "SET_SELETED_CHANNEL":
-      return { ...state, selected: action.channel };
+      return { ...state, selectedChannel: action.channel };
     default:
       return state;
   }

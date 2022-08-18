@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedChannel } from "../reducers/channelReducer";
 import { getChannelVideos } from "../services/service";
 
-const AutoComplete = () => {
+const AutoComplete = (inputValue) => {
   const channels = useSelector((state) => state.channels);
   const user = useSelector((state) => state.user);
   const channelNames = channels.allChannelTitles;
@@ -37,6 +37,7 @@ const AutoComplete = () => {
       options={channelNames}
       //getOptionLabel={(option) => option.title}
       autoHighlight
+      value={inputValue}
       onChange={selected}
       style={{ width: 300, margin: "10px" }}
       noOptionsText="Please sign in first"

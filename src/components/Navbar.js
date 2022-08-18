@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import MenuIcon from "@material-ui/icons/Menu";
-import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar } from "@material-ui/core";
 import { toggleDrawer } from "../reducers/mobileReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Hidden } from "@material-ui/core";
@@ -18,17 +17,9 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
+  const [inputValue, setInputValue] = useState(null);
   const user = useSelector((state) => state.user);
   const userInfo = user.user;
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = (route) => {
-    setAnchorEl(null);
-    if (typeof route === "string") history.push(`/${route}`);
-  };
 
   //const Dropdown = (
   //<div>
@@ -64,6 +55,7 @@ const Navbar = () => {
     dispatch(setHomepageInfo([]));
     await revokeToken(user.token);
     history.push("/");
+    setInputValue(null);
   };
 
   const logIn = () => {
@@ -120,7 +112,7 @@ const Navbar = () => {
           <MenuIcon />
         </IconButton>
       </Hidden>*/}
-      <AutoComplete />
+      <AutoComplete inputValue={inputValue} />
 
       <Hidden smDown>{button}</Hidden>
     </>

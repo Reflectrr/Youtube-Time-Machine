@@ -1,13 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AutoComplete from "../components/AutoComplete";
 import SectionRow from "../components/SectionRow";
 
 const HomePageView = () => {
-  const user = useSelector((state) => state.user);
   const channels = useSelector((state) => state.channels);
-  const selected = channels.selected;
-  console.log("selected", selected);
+  const selectedChannel = channels.selectedChannel;
 
   const SectionRows = channels.homepage.map((channel, index) => {
     return (
@@ -20,10 +17,10 @@ const HomePageView = () => {
 
   return (
     <div>
-      {selected ? (
+      {selectedChannel ? (
         <SectionRow
-          channel={selected}
-          key={`sectionRow-selected-${selected.channelId}`}
+          channel={selectedChannel}
+          key={`sectionRow-selected-${selectedChannel.channelId}`}
         />
       ) : (
         SectionRows

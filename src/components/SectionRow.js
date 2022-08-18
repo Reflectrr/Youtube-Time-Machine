@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Typography } from "@material-ui/core";
 import Swiper from "./Swiper";
 
