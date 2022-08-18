@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import VideoCard from "./VideoCard";
+import { Typography } from "@material-ui/core";
 
 SwiperCore.use([Navigation]);
 
@@ -34,6 +35,7 @@ const SwiperComponent = ({ videos }) => {
           return (
             <SwiperSlide key={`videoCard-${v.videoId}-${n}`}>
               <VideoCard video={v}></VideoCard>
+              <Typography variant="subtitle1">{v.title}</Typography>
             </SwiperSlide>
           );
         })}
