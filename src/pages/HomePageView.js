@@ -36,15 +36,6 @@ const HomePageView = () => {
             This website is a personal project that aims to explore interesting
             contents of your favorite Youtubers through randomized suggestions.
           </Typography>
-          <Typography variant="subtitle1" gutterBottom>
-            From personal experiences, sometimes the Youtube algorithm doesn't
-            always provide the most interesting contents to the user, especially
-            when you have watched most of the newly published videos from your
-            subscribed Youtubers. In these scenarios, the past videos from your
-            subscribed Youtubers might seem more interesting. Thus, through this
-            "Youtube Time Machine," hopefully you can find more interesting
-            contents from your favorite Youtubers.
-          </Typography>
           <Typography variant="subtitle1" component="span" gutterBottom>
             To get started, sign into your Youtube account here:{" "}
           </Typography>
