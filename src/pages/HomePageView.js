@@ -4,6 +4,7 @@ import SectionRow from "../components/SectionRow";
 import FeaturingSection from "../components/FeaturingSection";
 import { Typography, Button } from "@material-ui/core";
 import { useStyles } from "../style";
+import SubsectionRowStacking from "../components/SectionRowStacking";
 
 const HomePageView = () => {
   const classes = useStyles();
@@ -47,17 +48,12 @@ const HomePageView = () => {
           >
             Sign in to your Youtube account
           </Button>
-          {/* <Typography component="h2" variant="subtitle1" gutterBottom>
-            Note: this website doesn't store any of your information. Be sure to
-            grant access to view your Youtube account to allow the website to
-            function normally. Thank you for your understanding!
-          </Typography> */}
         </React.Fragment>
       )}
       {selectedVideo && <FeaturingSection video={selectedVideo} />}
 
       {selectedChannel ? (
-        <SectionRow
+        <SubsectionRowStacking
           channel={selectedChannel}
           key={`sectionRow-selected-${selectedChannel.channelId}`}
         />
