@@ -10,7 +10,7 @@ import { setUser, setToken } from "./reducers/userReducer";
 export const fetchChannels = async (token, dispatch) => {
   // TODO: fetch all subscriptions
   const channelIds = await getSubscribedChannelIds(token, dispatch);
-  const channelsHomepage = channelIds.slice(0, 5);
+  const channelsHomepage = channelIds.slice(0, 10);
   const fetchedVideos = await getAllChannelVideos(channelsHomepage, token);
   dispatch(setHomepageInfo(fetchedVideos));
 };
