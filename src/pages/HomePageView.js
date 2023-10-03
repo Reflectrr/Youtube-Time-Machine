@@ -29,14 +29,14 @@ const HomePageView = () => {
     <div>
       {!user.token && (
         <React.Fragment>
-          <Typography variant="h3" gutterBottom>
+          <Typography component="h1" variant="h3" gutterBottom>
             Welcome to Youtube Time Machine!
           </Typography>
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography component="h2" variant="subtitle1" gutterBottom>
             This website is a personal project that aims to explore interesting
             contents of your favorite Youtubers through randomized suggestions.
           </Typography>
-          <Typography variant="subtitle1" component="span" gutterBottom>
+          <Typography component="span" variant="subtitle1" gutterBottom>
             To get started, sign into your Youtube account here:{" "}
           </Typography>
 
@@ -47,12 +47,11 @@ const HomePageView = () => {
           >
             Sign in to your Youtube account
           </Button>
-
-          <Typography variant="subtitle1" gutterBottom>
+          {/* <Typography component="h2" variant="subtitle1" gutterBottom>
             Note: this website doesn't store any of your information. Be sure to
             grant access to view your Youtube account to allow the website to
             function normally. Thank you for your understanding!
-          </Typography>
+          </Typography> */}
         </React.Fragment>
       )}
       {selectedVideo && <FeaturingSection video={selectedVideo} />}
